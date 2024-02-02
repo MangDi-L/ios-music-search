@@ -7,16 +7,28 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        title = "asdf"
-        navigationController?.navigationBar.backgroundColor = .systemGray4
+        setupNavigationBar()
     }
 
+    private func setupNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+//        appearance.configureWithOpaqueBackground()  // 불투명으로
+//        appearance.configureWithTransparentBackground()  // 투명으로
+        appearance.backgroundColor = .systemGray6  // 색상설정
 
+        navigationController?.navigationBar.tintColor = .systemBlue
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Music Search"
+    }
 }
 
