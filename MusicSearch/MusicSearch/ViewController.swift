@@ -11,7 +11,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        view.backgroundColor = .white
+        title = "asdf"
+        navigationController?.navigationBar.backgroundColor = .systemGray4
     }
 
 
