@@ -10,3 +10,7 @@ import Foundation
 enum UIConstants {
     static let defaultValue: CGFloat = 8
 }
+
+enum HTTPMethod {
+    static let get = "GET"
+}

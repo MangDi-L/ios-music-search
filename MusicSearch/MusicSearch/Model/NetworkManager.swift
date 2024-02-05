@@ -21,7 +21,7 @@ final class NetworkManager {
             return
         }
         var request = URLRequest(url: url)
-        request.httpMethod = "GET"
+        request.httpMethod = HTTPMethod.get
         
         let task: URLSessionDataTask = session.dataTask(with: url) { data, response, error in
             guard (error == nil) else {
@@ -58,7 +58,7 @@ final class NetworkManager {
             return
         }
         var request = URLRequest(url: url)
-        request.httpMethod = "GET"
+        request.httpMethod = HTTPMethod.get
         
         imageTask = URLSession(configuration: .default).dataTask(with: request, completionHandler: { data, response, error in
             guard (error == nil) else {
