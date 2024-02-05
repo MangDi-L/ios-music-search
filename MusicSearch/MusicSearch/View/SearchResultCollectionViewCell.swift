@@ -28,6 +28,11 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        musicImageView.image = nil
+    }
+    
     func setupMusicImageView(urlString: String) {
         guard let url = URL(string: urlString)  else { return }
         
