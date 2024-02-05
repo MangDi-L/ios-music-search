@@ -38,9 +38,22 @@ final class MainViewController: UIViewController {
     }
     
     private func setupMainTableView() {
-//        mainTableView.dataSource = self
-//        mainTableView.delegate = self
+        mainTableView.dataSource = self
+        mainTableView.delegate = self
 //        mainTableView.register(<#T##cellClass: AnyClass?##AnyClass?#>, forCellReuseIdentifier: <#T##String#>)
     }
 }
 
+extension MainViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+}
+
+extension MainViewController: UITableViewDelegate {
+    
+}
