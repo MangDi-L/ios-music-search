@@ -19,6 +19,8 @@ final class MainViewController: UIViewController {
 
         view.backgroundColor = .white
         setupNavigationBar()
+        setupMainTableView()
+        setupAutoLayout()
     }
 
     private func setupNavigationBar() {
@@ -40,6 +42,15 @@ final class MainViewController: UIViewController {
         mainTableView.dataSource = self
         mainTableView.delegate = self
 //        mainTableView.register(<#T##cellClass: AnyClass?##AnyClass?#>, forCellReuseIdentifier: <#T##String#>)
+    }
+    
+    private func setupAutoLayout() {
+        NSLayoutConstraint.activate([
+            mainTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            mainTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            mainTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            mainTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
 }
 
