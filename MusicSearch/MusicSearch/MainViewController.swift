@@ -7,7 +7,13 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class MainViewController: UIViewController {
+    
+    private let mainTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +35,12 @@ final class ViewController: UIViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Music Search"
+    }
+    
+    private func setupMainTableView() {
+//        mainTableView.dataSource = self
+//        mainTableView.delegate = self
+//        mainTableView.register(<#T##cellClass: AnyClass?##AnyClass?#>, forCellReuseIdentifier: <#T##String#>)
     }
 }
 
