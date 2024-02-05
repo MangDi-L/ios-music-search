@@ -12,6 +12,7 @@ final class NetworkManager {
     private init() { }
     
     private let session = URLSession(configuration: .default)
+    var imageTask: URLSessionDataTask?
     
     // MARK: - GET
     func fetchMusicData(search: String, completion: @escaping ((Result<[Music]?, NetworkError>) -> ())) {
@@ -50,4 +51,33 @@ final class NetworkManager {
         task.resume()
     }
     
+    // MARK: - Image GET
+    func fetchImageData(url: String, completion: @escaping (Result<Data, NetworkError>) -> ()) {
+        guard let url = URL(string: url) else {
+            completion(.failure(.urlConvertError))
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        imageTask = URLSession(configuration: .default).dataTask(with: request, completionHandler: { data, response, error in
+            guard (error == nil) else {
+                completion(.failure(.networkError))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse,
+                  (200...299) ~= response.statusCode else {
+                completion(.failure(.responseError))
+                return
+            }
+            
+            if let data = data {
+                completion(.success(data))
+            } else {
+                completion(.failure(.dataNilError))
+            }
+        })
+        imageTask?.resume()
+    }
 }
