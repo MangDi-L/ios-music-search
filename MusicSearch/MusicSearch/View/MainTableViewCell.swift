@@ -64,6 +64,15 @@ final class MainTableViewCell: UITableViewCell {
         setupAutoLayout()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        musicImageView.image = nil
+        musicTitleLabel.text = nil
+        musicArtistNameLabel.text = nil
+        musicAlbumNameLabel.text = nil
+        musicReleaseDateLabel.text = nil
+    }
+    
     func setupCellData(data: Music) {
         guard let imageUrl = data.imageUrl else { return }
         setupMusicImageView(urlString: imageUrl)
