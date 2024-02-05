@@ -62,4 +62,20 @@ final class MainTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
     }
+    
+    private func setupAutoLayout() {
+        [musicImageView, labelStackView].forEach { self.addSubview($0) }
+        NSLayoutConstraint.activate([
+            musicImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            musicImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            musicImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 8),
+            musicImageView.widthAnchor.constraint(equalTo: musicImageView.heightAnchor, multiplier: 1),
+            
+            labelStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            labelStackView.leadingAnchor.constraint(equalTo: musicImageView.trailingAnchor, constant: 8),
+            labelStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8),
+            labelStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 8)
+        ])
+        labelStackView.arrangedSubviews[2].setContentHuggingPriority(.defaultLow, for: .vertical)
+    }
 }
