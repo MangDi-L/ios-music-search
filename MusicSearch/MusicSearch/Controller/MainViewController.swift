@@ -82,11 +82,13 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return musicData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cell.mainTableViewCellIdentifier, for: indexPath) as? MainTableViewCell ?? MainTableViewCell()
+        cell.setupCellData(data: musicData[indexPath.row])
+        return cell
     }
 }
 
