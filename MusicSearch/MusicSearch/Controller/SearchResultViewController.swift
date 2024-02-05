@@ -16,5 +16,16 @@ final class SearchResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupAutoLayout()
+    }
+    
+    private func setupAutoLayout() {
+        view.addSubview(searchResultCollectionView)
+        NSLayoutConstraint.activate([
+            searchResultCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            searchResultCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchResultCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            searchResultCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 }
