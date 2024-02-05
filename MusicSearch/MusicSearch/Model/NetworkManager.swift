@@ -15,8 +15,8 @@ final class NetworkManager {
     var imageTask: URLSessionDataTask?
     
     // MARK: - GET
-    func fetchMusicData(search: String, completion: @escaping ((Result<[Music]?, NetworkError>) -> ())) {
-        guard let url = URL(string: "https://itunes.apple.com/search?media=music&term=\(search)") else {
+    func fetchMusicData(search: String, completion: @escaping ((Result<[Music]?, NetworkError>) -> Void)) {
+        guard let url = URL(string: MusicApi.url + search) else {
             completion(.failure(.urlConvertError))
             return
         }
@@ -24,7 +24,7 @@ final class NetworkManager {
         request.httpMethod = HTTPMethod.get
         
         let task: URLSessionDataTask = session.dataTask(with: url) { data, response, error in
-            guard (error == nil) else {
+            guard error == nil else {
                 completion(.failure(.networkError))
                 return
             }
@@ -52,7 +52,7 @@ final class NetworkManager {
     }
     
     // MARK: - Image GET
-    func fetchImageData(url: String, completion: @escaping (Result<Data, NetworkError>) -> ()) {
+    func fetchImageData(url: String, completion: @escaping (Result<Data, NetworkError>) -> Void) {
         guard let url = URL(string: url) else {
             completion(.failure(.urlConvertError))
             return
@@ -61,7 +61,7 @@ final class NetworkManager {
         request.httpMethod = HTTPMethod.get
         
         imageTask = URLSession(configuration: .default).dataTask(with: request, completionHandler: { data, response, error in
-            guard (error == nil) else {
+            guard error == nil else {
                 completion(.failure(.networkError))
                 return
             }

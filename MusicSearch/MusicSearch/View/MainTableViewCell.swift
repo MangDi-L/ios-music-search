@@ -106,13 +106,13 @@ final class MainTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             musicImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: UIConstants.defaultValue),
             musicImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: UIConstants.defaultValue),
-            musicImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: UIConstants.defaultValue),
+            musicImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -UIConstants.defaultValue),
             musicImageView.widthAnchor.constraint(equalTo: musicImageView.heightAnchor, multiplier: 1),
             
             labelStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: UIConstants.defaultValue),
             labelStackView.leadingAnchor.constraint(equalTo: musicImageView.trailingAnchor, constant: UIConstants.defaultValue),
             labelStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: UIConstants.defaultValue),
-            labelStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: UIConstants.defaultValue)
+            labelStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -UIConstants.defaultValue)
         ])
         labelStackView.arrangedSubviews[2].setContentHuggingPriority(.defaultLow, for: .vertical)
     }

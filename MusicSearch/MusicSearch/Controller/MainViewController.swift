@@ -93,5 +93,8 @@ extension MainViewController: UITableViewDataSource {
 }
 
 extension MainViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let height = view.safeAreaLayoutGuide.layoutFrame.height / Cell.cellHeightDevidingValue
+        return height
+    }
 }
