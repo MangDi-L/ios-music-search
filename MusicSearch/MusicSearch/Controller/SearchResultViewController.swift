@@ -22,6 +22,24 @@ final class SearchResultViewController: UIViewController {
         setupSearchResultCollectionView()
     }
     
+    func setupMusicData(search: String) {
+        NetworkManager.shared.fetchMusicData(search: search) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let data):
+                guard let data else { return }
+                self.musicData = data
+                DispatchQueue.main.async {
+                    self.searchResultCollectionView.reloadData()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    print("메인 ", error.rawValue)
+                }
+            }
+        }
+    }
+    
     private func setupSearchResultCollectionView() {
         searchResultCollectionView.backgroundColor = .white
         searchResultCollectionView.dataSource = self

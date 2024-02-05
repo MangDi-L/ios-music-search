@@ -15,9 +15,8 @@ final class MainViewController: UIViewController {
     }()
     
     private lazy var mainSearchController: UISearchController = {
-        let searchController = UISearchController()
-        searchController.searchBar.placeholder = "Enter the music title"
-        searchController.searchBar.searchBarStyle = .default
+        let searchResultVC = SearchResultViewController()
+        let searchController = UISearchController(searchResultsController: searchResultVC)
         return searchController
     }()
     
@@ -54,8 +53,11 @@ final class MainViewController: UIViewController {
     
     private func setupSearchBar() {
         navigationItem.searchController = mainSearchController
+        mainSearchController.searchBar.placeholder = "Enter the music title"
+        mainSearchController.searchBar.searchBarStyle = .default
         mainSearchController.searchBar.autocapitalizationType = .none
-//        mainSearchController.searchResultsUpdater = self
+        mainSearchController.hidesNavigationBarDuringPresentation = false
+        mainSearchController.searchResultsUpdater = self
     }
     
     private func setupMainTableView() {
@@ -109,5 +111,12 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let height = view.safeAreaLayoutGuide.layoutFrame.height / Cell.cellHeightDevidingValue
         return height
+    }
+}
+
+extension MainViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchResultVC = searchController.searchResultsController as? SearchResultViewController ?? SearchResultViewController()
+        searchResultVC.setupMusicData(search: searchController.searchBar.text ?? "")
     }
 }
