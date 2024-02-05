@@ -14,9 +14,9 @@ final class NetworkManager {
     private let session = URLSession(configuration: .default)
     
     // MARK: - GET
-    func fetchMusicData(search: String, completion: @escaping ((Result<[Music]?, Error>) -> ())) {
+    func fetchMusicData(search: String, completion: @escaping ((Result<[Music]?, NetworkError>) -> ())) {
         guard let url = URL(string: "https://itunes.apple.com/search?media=music&term=\(search)") else {
-            completion(.failure(<#Error#>))
+            completion(.failure(.urlConvertError))
             return
         }
         var request = URLRequest(url: url)
@@ -24,19 +24,19 @@ final class NetworkManager {
         
         let task: URLSessionDataTask = session.dataTask(with: url) { data, response, error in
             guard (error == nil) else {
-                completion(.failure(error!))
+                completion(.failure(.networkError))
                 return
             }
             
             guard let response = response as? HTTPURLResponse,
                   (200...299) ~= response.statusCode else {
                 print((response as? HTTPURLResponse)?.statusCode as Any)
-                completion(.failure(error!))
+                completion(.failure(.responseError))
                 return
             }
             
             guard let data = data else {
-                completion(.failure(error!))
+                completion(.failure(.dataNilError))
                 return
             }
             
@@ -44,7 +44,7 @@ final class NetworkManager {
                 let decodedData = try JSONDecoder().decode(SearchMusicInformation.self, from: data)
                 completion(.success(decodedData.results))
             } catch {
-                completion(.failure(error))
+                completion(.failure(.decodeError))
             }
         }
         task.resume()
