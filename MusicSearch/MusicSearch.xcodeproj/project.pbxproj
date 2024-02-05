@@ -17,6 +17,7 @@
 		1BF471132B708BD200A54012 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF471122B708BD200A54012 /* Constants.swift */; };
 		1BF471152B708DC200A54012 /* MusicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF471142B708DC200A54012 /* MusicModel.swift */; };
 		1BF471172B70922B00A54012 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF471162B70922B00A54012 /* NetworkManager.swift */; };
+		1BF4711B2B70975D00A54012 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF4711A2B70975D00A54012 /* NetworkError.swift */; };
 		739B8FE4FCAA611D298ED72F /* Pods_MusicSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B63E694CBE72D7027C7EAB94 /* Pods_MusicSearch.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		1BF471122B708BD200A54012 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1BF471142B708DC200A54012 /* MusicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicModel.swift; sourceTree = "<group>"; };
 		1BF471162B70922B00A54012 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		1BF4711A2B70975D00A54012 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		35739F12F6EC16A02459064B /* Pods-MusicSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicSearch.debug.xcconfig"; path = "Target Support Files/Pods-MusicSearch/Pods-MusicSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		B63E694CBE72D7027C7EAB94 /* Pods_MusicSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F36AADE375E579E0DAEB97A2 /* Pods-MusicSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicSearch.release.xcconfig"; path = "Target Support Files/Pods-MusicSearch/Pods-MusicSearch.release.xcconfig"; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				1BF471122B708BD200A54012 /* Constants.swift */,
 				1BF471142B708DC200A54012 /* MusicModel.swift */,
 				1BF471162B70922B00A54012 /* NetworkManager.swift */,
+				1BF4711A2B70975D00A54012 /* NetworkError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BD7C58C2B6BE7C200B0C0C7 /* MainViewController.swift in Sources */,
+				1BF4711B2B70975D00A54012 /* NetworkError.swift in Sources */,
 				1BD7C5882B6BE7C200B0C0C7 /* AppDelegate.swift in Sources */,
 				1BF471132B708BD200A54012 /* Constants.swift in Sources */,
 				1BF471172B70922B00A54012 /* NetworkManager.swift in Sources */,
