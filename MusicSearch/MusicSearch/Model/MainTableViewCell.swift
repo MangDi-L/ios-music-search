@@ -42,7 +42,7 @@ final class MainTableViewCell: UITableViewCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
-        stackView.spacing = 8
+        stackView.spacing = UIConstants.defaultValue
         stackView.alignment = .leading
         [musicTitleLabel, musicArtistNameLabel, musicAlbumNameLabel, musicReleaseDateLabel].forEach {
             stackView.addArrangedSubview($0)
@@ -67,15 +67,15 @@ final class MainTableViewCell: UITableViewCell {
     private func setupAutoLayout() {
         [musicImageView, labelStackView].forEach { self.addSubview($0) }
         NSLayoutConstraint.activate([
-            musicImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-            musicImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            musicImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 8),
+            musicImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: UIConstants.defaultValue),
+            musicImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: UIConstants.defaultValue),
+            musicImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: UIConstants.defaultValue),
             musicImageView.widthAnchor.constraint(equalTo: musicImageView.heightAnchor, multiplier: 1),
             
-            labelStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-            labelStackView.leadingAnchor.constraint(equalTo: musicImageView.trailingAnchor, constant: 8),
-            labelStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8),
-            labelStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 8)
+            labelStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: UIConstants.defaultValue),
+            labelStackView.leadingAnchor.constraint(equalTo: musicImageView.trailingAnchor, constant: UIConstants.defaultValue),
+            labelStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: UIConstants.defaultValue),
+            labelStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: UIConstants.defaultValue)
         ])
         labelStackView.arrangedSubviews[2].setContentHuggingPriority(.defaultLow, for: .vertical)
     }
