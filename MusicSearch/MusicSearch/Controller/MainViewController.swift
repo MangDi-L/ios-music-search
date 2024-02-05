@@ -14,6 +14,13 @@ final class MainViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var mainSearchController: UISearchController = {
+        let searchController = UISearchController()
+        searchController.searchBar.placeholder = "Enter the music title"
+        searchController.searchBar.searchBarStyle = .default
+        return searchController
+    }()
+    
     private var musicData: [Music] = []
 
     override func viewDidLoad() {
@@ -43,6 +50,12 @@ final class MainViewController: UIViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Music Search"
+    }
+    
+    private func setupSearchBar() {
+        navigationItem.searchController = mainSearchController
+        mainSearchController.searchBar.autocapitalizationType = .none
+//        mainSearchController.searchResultsUpdater = self
     }
     
     private func setupMainTableView() {
