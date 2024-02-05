@@ -17,6 +17,28 @@ final class SearchResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAutoLayout()
+        setupSearchResultCollectionView()
+    }
+    
+    private func setupSearchResultCollectionView() {
+        searchResultCollectionView.backgroundColor = .white
+//        searchResultCollectionView.dataSource = self
+        
+        let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                heightDimension: .fractionalHeight(1))
+        let layoutItem = NSCollectionLayoutItem(layoutSize: layoutSize)
+        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: UIConstants.defaultValue,
+                                                           leading: UIConstants.defaultValue,
+                                                           bottom: UIConstants.defaultValue,
+                                                           trailing: UIConstants.defaultValue)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(0.4))
+        let layoutGruop = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                             subitem: layoutItem,
+                                                             count: 4)
+        let layoutSection = NSCollectionLayoutSection(group: layoutGruop)
+        let compositionalLayout = UICollectionViewCompositionalLayout(section: layoutSection)
+        searchResultCollectionView.collectionViewLayout = compositionalLayout
     }
     
     private func setupAutoLayout() {
