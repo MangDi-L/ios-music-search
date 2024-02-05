@@ -67,13 +67,37 @@
 			children = (
 				1BD7C5872B6BE7C200B0C0C7 /* AppDelegate.swift */,
 				1BD7C5892B6BE7C200B0C0C7 /* SceneDelegate.swift */,
-				1BD7C58B2B6BE7C200B0C0C7 /* MainViewController.swift */,
-				1BD7C58D2B6BE7C200B0C0C7 /* Main.storyboard */,
+				1BF4710F2B70794F00A54012 /* Model */,
+				1BF4710E2B70794700A54012 /* View */,
+				1BF4710D2B70793D00A54012 /* Controller */,
 				1BD7C5902B6BE7C300B0C0C7 /* Assets.xcassets */,
 				1BD7C5922B6BE7C300B0C0C7 /* LaunchScreen.storyboard */,
 				1BD7C5952B6BE7C300B0C0C7 /* Info.plist */,
 			);
 			path = MusicSearch;
+			sourceTree = "<group>";
+		};
+		1BF4710D2B70793D00A54012 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1BD7C58B2B6BE7C200B0C0C7 /* MainViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1BF4710E2B70794700A54012 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1BD7C58D2B6BE7C200B0C0C7 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1BF4710F2B70794F00A54012 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B682B6BA56F47D526F0A9EE6 /* Frameworks */ = {
