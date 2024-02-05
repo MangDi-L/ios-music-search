@@ -13,6 +13,8 @@ final class MainViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    
+    private var musicData: [Music] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,11 @@ final class MainViewController: UIViewController {
         setupNavigationBar()
         setupMainTableView()
         setupAutoLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupMusicData()
     }
 
     private func setupNavigationBar() {
@@ -42,6 +49,24 @@ final class MainViewController: UIViewController {
         mainTableView.dataSource = self
         mainTableView.delegate = self
         mainTableView.register(MainTableViewCell.self, forCellReuseIdentifier: Cell.mainTableViewCellIdentifier)
+    }
+    
+    private func setupMusicData() {
+        NetworkManager.shared.fetchMusicData(search: "IU") { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let data):
+                guard let data else { return }
+                self.musicData = data
+                DispatchQueue.main.async {
+                    self.mainTableView.reloadData()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    print("메인 ", error.rawValue)
+                }
+            }
+        }
     }
     
     private func setupAutoLayout() {
