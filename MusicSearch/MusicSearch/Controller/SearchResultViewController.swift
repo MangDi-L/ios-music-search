@@ -13,6 +13,8 @@ final class SearchResultViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
+    
+    private var musicData: [Music] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +24,9 @@ final class SearchResultViewController: UIViewController {
     
     private func setupSearchResultCollectionView() {
         searchResultCollectionView.backgroundColor = .white
-//        searchResultCollectionView.dataSource = self
+        searchResultCollectionView.dataSource = self
+        // 지울수도있음
+        searchResultCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: Cell.searchResultCollectionViewCellIdentifier)
         
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                 heightDimension: .fractionalHeight(1))
@@ -49,5 +53,16 @@ final class SearchResultViewController: UIViewController {
             searchResultCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             searchResultCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+}
+
+extension SearchResultViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return musicData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.searchResultCollectionViewCellIdentifier, for: indexPath) as? SearchResultCollectionViewCell ?? SearchResultCollectionViewCell()
+        return cell
     }
 }
