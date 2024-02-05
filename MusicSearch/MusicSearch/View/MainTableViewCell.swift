@@ -64,6 +64,14 @@ final class MainTableViewCell: UITableViewCell {
         setupAutoLayout()
     }
     
+    func setupCellData(data: Music) {
+        guard let imageUrl = data.imageUrl else { return }
+        musicTitleLabel.text = data.trackName
+        musicArtistNameLabel.text = data.artistName
+        musicAlbumNameLabel.text = data.collectionName
+        musicReleaseDateLabel.text = data.releaseDateToString
+    }
+    
     private func setupAutoLayout() {
         [musicImageView, labelStackView].forEach { self.addSubview($0) }
         NSLayoutConstraint.activate([

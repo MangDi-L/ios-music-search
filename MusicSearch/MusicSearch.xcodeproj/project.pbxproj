@@ -98,6 +98,7 @@
 		1BF4710E2B70794700A54012 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1BF471102B707A2300A54012 /* MainTableViewCell.swift */,
 				1BD7C58D2B6BE7C200B0C0C7 /* Main.storyboard */,
 			);
 			path = View;
@@ -106,7 +107,6 @@
 		1BF4710F2B70794F00A54012 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1BF471102B707A2300A54012 /* MainTableViewCell.swift */,
 				1BF471122B708BD200A54012 /* Constants.swift */,
 				1BF471142B708DC200A54012 /* MusicModel.swift */,
 				1BF471162B70922B00A54012 /* NetworkManager.swift */,
