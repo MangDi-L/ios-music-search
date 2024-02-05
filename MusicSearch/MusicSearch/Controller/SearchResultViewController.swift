@@ -63,6 +63,7 @@ extension SearchResultViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.searchResultCollectionViewCellIdentifier, for: indexPath) as? SearchResultCollectionViewCell ?? SearchResultCollectionViewCell()
+        cell.setupCellData(data: musicData[indexPath.item])
         return cell
     }
 }

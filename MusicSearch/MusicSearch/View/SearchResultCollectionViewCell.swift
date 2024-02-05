@@ -31,9 +31,16 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         musicImageView.image = nil
+        musicTitleLabel.text = nil
     }
     
-    func setupMusicImageView(urlString: String) {
+    func setupCellData(data: Music) {
+        guard let imageUrl = data.imageUrl else { return }
+        setupMusicImageView(urlString: imageUrl)
+        musicTitleLabel.text = data.trackName
+    }
+    
+    private func setupMusicImageView(urlString: String) {
         guard let url = URL(string: urlString)  else { return }
         
         NetworkManager.shared.fetchImageData(url: urlString) { [weak self] result in
