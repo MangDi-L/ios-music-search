@@ -41,7 +41,7 @@ final class MainViewController: UIViewController {
     private func setupMainTableView() {
         mainTableView.dataSource = self
         mainTableView.delegate = self
-//        mainTableView.register(<#T##cellClass: AnyClass?##AnyClass?#>, forCellReuseIdentifier: <#T##String#>)
+        mainTableView.register(MainTableViewCell.self, forCellReuseIdentifier: Cell.mainTableViewCellIdentifier)
     }
     
     private func setupAutoLayout() {

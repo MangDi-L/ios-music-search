@@ -14,3 +14,7 @@ enum UIConstants {
 enum HTTPMethod {
     static let get = "GET"
 }
+
+enum Cell {
+    static let mainTableViewCellIdentifier = "MainTableViewCell"
+}
