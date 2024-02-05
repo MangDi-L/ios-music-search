@@ -61,6 +61,7 @@ final class MainTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        setupAutoLayout()
     }
     
     private func setupAutoLayout() {

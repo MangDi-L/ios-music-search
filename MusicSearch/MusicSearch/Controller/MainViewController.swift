@@ -45,6 +45,7 @@ final class MainViewController: UIViewController {
     }
     
     private func setupAutoLayout() {
+        view.addSubview(mainTableView)
         NSLayoutConstraint.activate([
             mainTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             mainTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
