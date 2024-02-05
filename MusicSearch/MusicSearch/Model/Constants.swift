@@ -9,6 +9,7 @@ import Foundation
 
 enum UIConstants {
     static let defaultValue: CGFloat = 8
+    static let defalutMultiplier: CGFloat = 1
 }
 
 enum HTTPMethod {

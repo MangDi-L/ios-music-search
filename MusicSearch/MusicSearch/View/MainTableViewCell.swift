@@ -107,7 +107,7 @@ final class MainTableViewCell: UITableViewCell {
             musicImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: UIConstants.defaultValue),
             musicImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: UIConstants.defaultValue),
             musicImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -UIConstants.defaultValue),
-            musicImageView.widthAnchor.constraint(equalTo: musicImageView.heightAnchor, multiplier: 1),
+            musicImageView.widthAnchor.constraint(equalTo: musicImageView.heightAnchor, multiplier: UIConstants.defalutMultiplier),
             
             labelStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: UIConstants.defaultValue),
             labelStackView.leadingAnchor.constraint(equalTo: musicImageView.trailingAnchor, constant: UIConstants.defaultValue),
