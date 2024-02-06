@@ -9,7 +9,9 @@ import Foundation
 
 enum UIConstants {
     static let defaultValue: CGFloat = 8
+    static let highValue: CGFloat = 20
     static let defalutMultiplier: CGFloat = 1
+    static let labelWidthMulitplier: CGFloat = 0.2
 }
 
 enum HTTPMethod {
@@ -24,4 +26,10 @@ enum Cell {
 
 enum MusicApi {
     static let url = "https://itunes.apple.com/search?media=music&term="
+}
+
+enum MusicInformation {
+    static let title = "Title"
+    static let artist = "Artist"
+    static let album = "Album"
 }
