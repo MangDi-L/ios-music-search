@@ -15,6 +15,13 @@ final class DetailViewController: UIViewController {
         return imageView
     }()
     
+    private lazy var musicPlayTime: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .preferredFont(forTextStyle: .caption1)
+        return label
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -78,6 +85,7 @@ final class DetailViewController: UIViewController {
         guard let musicData,
               let url = musicData.imageUrl else { return }
         setupMusicImageView(urlString: url)
+//        musicPlayTime.text = musicData.playTime
         musicTitleLabel.text = musicData.trackName
         musicArtistNameLabel.text = musicData.artistName
         musicAlbumNameLabel.text = musicData.collectionName
@@ -109,9 +117,10 @@ final class DetailViewController: UIViewController {
          musicArtistNameLabel,
          musicAlbumNameLabel,
          musicReleaseDateLabel,
-        titleLabel,
-        artistNameLabel,
-        albumNameLabel].forEach { view.addSubview($0) }
+         musicPlayTime,
+         titleLabel,
+         artistNameLabel,
+         albumNameLabel].forEach { view.addSubview($0) }
         
         let musicImageViewHeightEqualWidthConstraint = musicImageView.heightAnchor.constraint(equalTo: musicImageView.widthAnchor, multiplier: UIConstants.defalutMultiplier)
         let musicImageViewHeightLessThanOrEqualToSafeAreaHeight = musicImageView.heightAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.3)
@@ -129,11 +138,15 @@ final class DetailViewController: UIViewController {
             musicImageViewHeightEqualWidthConstraint,
             musicImageViewHeightLessThanOrEqualToSafeAreaHeight,
             
-            titleLabel.topAnchor.constraint(equalTo: musicImageView.bottomAnchor, constant: UIConstants.defaultValue),
+            musicPlayTime.topAnchor.constraint(equalTo: musicImageView.bottomAnchor),
+            musicPlayTime.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
+            musicPlayTime.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.defaultValue),
+            
+            titleLabel.topAnchor.constraint(equalTo: musicPlayTime.bottomAnchor, constant: UIConstants.defaultValue),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
             titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: UIConstants.labelWidthMulitplier),
             
-            musicTitleLabel.topAnchor.constraint(equalTo: musicImageView.bottomAnchor, constant: UIConstants.defaultValue),
+            musicTitleLabel.topAnchor.constraint(equalTo: musicPlayTime.bottomAnchor, constant: UIConstants.defaultValue),
             musicTitleLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: UIConstants.defaultValue),
             musicTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.defaultValue),
             

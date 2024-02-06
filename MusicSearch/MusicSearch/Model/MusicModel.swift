@@ -18,6 +18,7 @@ struct Music: Codable {
     let artistName: String?
     let collectionName, trackName: String?
     let imageUrl: String?
+    let playTime: Int?
     private let releaseDate: String?
     
     // 2023-04-07T12:00:00Z
@@ -38,6 +39,7 @@ struct Music: Codable {
     enum CodingKeys: String, CodingKey {
         case artistName, collectionName, trackName
         case imageUrl = "artworkUrl100"
+        case playTime = "trackTimeMillis"
         case releaseDate
     }
 }
