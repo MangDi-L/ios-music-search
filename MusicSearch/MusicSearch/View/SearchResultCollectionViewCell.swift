@@ -19,7 +19,15 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
         label.textAlignment = .center
-        label.numberOfLines = 2
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    private lazy var musicArtistNameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .preferredFont(forTextStyle: .caption2)
+        label.textAlignment = .center
         return label
     }()
     
@@ -36,12 +44,14 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         musicImageView.image = nil
         musicTitleLabel.text = nil
+        musicArtistNameLabel.text = nil
     }
     
     func setupCellData(data: Music) {
         guard let imageUrl = data.imageUrl else { return }
         setupMusicImageView(urlString: imageUrl)
         musicTitleLabel.text = data.trackName
+        musicArtistNameLabel.text = data.artistName
     }
     
     private func setupMusicImageView(urlString: String) {
@@ -64,7 +74,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupAutoLayout() {
-        [musicImageView, musicTitleLabel].forEach { self.addSubview($0) }
+        [musicImageView, musicTitleLabel, musicArtistNameLabel].forEach { self.addSubview($0) }
         NSLayoutConstraint.activate([
             musicImageView.topAnchor.constraint(equalTo: self.topAnchor),
             musicImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -74,7 +84,11 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
             musicTitleLabel.topAnchor.constraint(equalTo: musicImageView.bottomAnchor, constant: UIConstants.defaultValue),
             musicTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             musicTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            musicTitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            
+            musicArtistNameLabel.topAnchor.constraint(equalTo: musicTitleLabel.bottomAnchor),
+            musicArtistNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            musicArtistNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            musicArtistNameLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
 }
