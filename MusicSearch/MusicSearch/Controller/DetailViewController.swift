@@ -47,6 +47,7 @@ final class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         setupAutoLayout()
     }
     
@@ -87,7 +88,7 @@ final class DetailViewController: UIViewController {
          musicReleaseDateLabel].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
-            musicImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIConstants.defaultValue),
+            musicImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIConstants.defaultValue),
             musicImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
             musicImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: UIConstants.defaultValue),
             

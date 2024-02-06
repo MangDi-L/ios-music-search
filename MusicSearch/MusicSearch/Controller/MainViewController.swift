@@ -109,6 +109,12 @@ extension MainViewController: UITableViewDelegate {
         let height = view.safeAreaLayoutGuide.layoutFrame.height / Cell.cellHeightDevidingValue
         return height
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailVC = DetailViewController()
+        detailVC.musicData = musicData[indexPath.row]
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 extension MainViewController: UISearchResultsUpdating {
