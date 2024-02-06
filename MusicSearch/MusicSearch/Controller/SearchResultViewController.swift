@@ -9,7 +9,7 @@ import UIKit
 
 final class SearchResultViewController: UIViewController {
     private lazy var searchResultCollectionView: UICollectionView = {
-        let collectionView = UICollectionView()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeSearchResultCollectionViewLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -45,7 +45,10 @@ final class SearchResultViewController: UIViewController {
         searchResultCollectionView.dataSource = self
         // 지울수도있음
         searchResultCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: Cell.searchResultCollectionViewCellIdentifier)
-        
+    }
+    
+    // 상수 고치기
+    private func makeSearchResultCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                 heightDimension: .fractionalHeight(1))
         let layoutItem = NSCollectionLayoutItem(layoutSize: layoutSize)
@@ -54,13 +57,13 @@ final class SearchResultViewController: UIViewController {
                                                            bottom: UIConstants.defaultValue,
                                                            trailing: UIConstants.defaultValue)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(0.4))
+                                               heightDimension: .fractionalHeight(0.15))
         let layoutGruop = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                              subitem: layoutItem,
                                                              count: 4)
         let layoutSection = NSCollectionLayoutSection(group: layoutGruop)
         let compositionalLayout = UICollectionViewCompositionalLayout(section: layoutSection)
-        searchResultCollectionView.collectionViewLayout = compositionalLayout
+        return compositionalLayout
     }
     
     private func setupAutoLayout() {

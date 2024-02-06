@@ -13,13 +13,7 @@ final class MainViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-    
-    private lazy var mainSearchController: UISearchController = {
-        let searchResultVC = SearchResultViewController()
-        let searchController = UISearchController(searchResultsController: searchResultVC)
-        return searchController
-    }()
-    
+    private let searchResultVC = SearchResultViewController()
     private var musicData: [Music] = []
 
     override func viewDidLoad() {
@@ -27,6 +21,7 @@ final class MainViewController: UIViewController {
 
         view.backgroundColor = .white
         setupNavigationBar()
+        setupSearchBar()
         setupMainTableView()
         setupAutoLayout()
     }
@@ -52,7 +47,9 @@ final class MainViewController: UIViewController {
     }
     
     private func setupSearchBar() {
+        let mainSearchController = UISearchController(searchResultsController: self.searchResultVC)
         navigationItem.searchController = mainSearchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         mainSearchController.searchBar.placeholder = "Enter the music title"
         mainSearchController.searchBar.searchBarStyle = .default
         mainSearchController.searchBar.autocapitalizationType = .none

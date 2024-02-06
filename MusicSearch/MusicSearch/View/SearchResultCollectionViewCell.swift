@@ -22,6 +22,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        setupAutoLayout()
     }
     
     required init?(coder: NSCoder) {
