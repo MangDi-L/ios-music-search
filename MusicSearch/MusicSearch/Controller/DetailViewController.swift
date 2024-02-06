@@ -11,6 +11,7 @@ final class DetailViewController: UIViewController {
     private lazy var musicImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -40,5 +41,36 @@ final class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupAutoLayout()
+    }
+    
+    private func setupAutoLayout() {
+        [musicImageView, 
+         musicTitleLabel,
+         musicArtistNameLabel,
+         musicAlbumNameLabel,
+         musicReleaseDateLabel].forEach { view.addSubview($0) }
+        
+        NSLayoutConstraint.activate([
+            musicImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIConstants.defaultValue),
+            musicImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
+            musicImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: UIConstants.defaultValue),
+            
+            musicTitleLabel.topAnchor.constraint(equalTo: musicImageView.bottomAnchor, constant: UIConstants.defaultValue),
+            musicTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
+            musicTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: UIConstants.defaultValue),
+            
+            musicArtistNameLabel.topAnchor.constraint(equalTo: musicTitleLabel.bottomAnchor, constant: UIConstants.defaultValue),
+            musicArtistNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
+            musicArtistNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: UIConstants.defaultValue),
+            
+            musicAlbumNameLabel.topAnchor.constraint(equalTo: musicArtistNameLabel.bottomAnchor, constant: UIConstants.defaultValue),
+            musicAlbumNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
+            musicAlbumNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: UIConstants.defaultValue),
+            
+            musicReleaseDateLabel.topAnchor.constraint(equalTo: musicAlbumNameLabel.bottomAnchor, constant: UIConstants.defaultValue),
+            musicReleaseDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
+            musicReleaseDateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: UIConstants.defaultValue)
+        ])
     }
 }
