@@ -29,6 +29,7 @@ final class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupMusicData()
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     private func setupNavigationBar() {
@@ -41,8 +42,6 @@ final class MainViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-
-        navigationController?.navigationBar.prefersLargeTitles = true
         title = "Music Search"
     }
     

@@ -49,6 +49,7 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupAutoLayout()
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     private func setupDetailUI() {
@@ -87,10 +88,18 @@ final class DetailViewController: UIViewController {
          musicAlbumNameLabel,
          musicReleaseDateLabel].forEach { view.addSubview($0) }
         
+        let musicImageViewHeightEqualWidthConstraint = musicImageView.heightAnchor.constraint(equalTo: musicImageView.widthAnchor, multiplier: UIConstants.defalutMultiplier)
+        let musicImageViewHeightLessThanOrEqualToSafeAreaHeight = musicImageView.heightAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.3)
+        
+        musicImageViewHeightLessThanOrEqualToSafeAreaHeight.priority = .defaultHigh
+        musicImageViewHeightEqualWidthConstraint.priority = .defaultLow
+        
         NSLayoutConstraint.activate([
             musicImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIConstants.defaultValue),
             musicImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
             musicImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: UIConstants.defaultValue),
+            musicImageViewHeightEqualWidthConstraint,
+            musicImageViewHeightLessThanOrEqualToSafeAreaHeight,
             
             musicTitleLabel.topAnchor.constraint(equalTo: musicImageView.bottomAnchor, constant: UIConstants.defaultValue),
             musicTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
