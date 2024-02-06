@@ -33,3 +33,8 @@ enum MusicInformation {
     static let artist = "Artist"
     static let album = "Album"
 }
+
+enum TimeConstants {
+    static let thousand: Double = 1000
+    static let sixty: Double = 60
+}

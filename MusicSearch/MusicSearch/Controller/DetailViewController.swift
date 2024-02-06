@@ -19,6 +19,7 @@ final class DetailViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .caption1)
+        label.textAlignment = .center
         return label
     }()
     
@@ -83,13 +84,21 @@ final class DetailViewController: UIViewController {
     
     private func setupDetailUI() {
         guard let musicData,
-              let url = musicData.imageUrl else { return }
+              let url = musicData.imageUrl,
+              let playTime = musicData.playTime else { return }
         setupMusicImageView(urlString: url)
-//        musicPlayTime.text = musicData.playTime
+        musicPlayTime.text = calculateMusicPlayTime(time: playTime)
         musicTitleLabel.text = musicData.trackName
         musicArtistNameLabel.text = musicData.artistName
         musicAlbumNameLabel.text = musicData.collectionName
         musicReleaseDateLabel.text = musicData.releaseDateToString
+    }
+    
+    private func calculateMusicPlayTime(time: Double) -> String {
+        var seconds = round(time / TimeConstants.thousand)
+        let minutes = seconds / TimeConstants.sixty
+        seconds = Double(Int(seconds) % Int(TimeConstants.sixty))
+        return "\(Int(minutes)):\(Int(seconds))"
     }
     
     private func setupMusicImageView(urlString: String) {
@@ -138,7 +147,7 @@ final class DetailViewController: UIViewController {
             musicImageViewHeightEqualWidthConstraint,
             musicImageViewHeightLessThanOrEqualToSafeAreaHeight,
             
-            musicPlayTime.topAnchor.constraint(equalTo: musicImageView.bottomAnchor),
+            musicPlayTime.topAnchor.constraint(equalTo: musicImageView.bottomAnchor, constant: UIConstants.defaultValue),
             musicPlayTime.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
             musicPlayTime.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.defaultValue),
             

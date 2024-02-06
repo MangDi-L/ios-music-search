@@ -18,7 +18,7 @@ struct Music: Codable {
     let artistName: String?
     let collectionName, trackName: String?
     let imageUrl: String?
-    let playTime: Int?
+    let playTime: Double?
     private let releaseDate: String?
     
     // 2023-04-07T12:00:00Z
