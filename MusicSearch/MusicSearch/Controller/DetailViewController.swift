@@ -132,7 +132,7 @@ final class DetailViewController: UIViewController {
          albumNameLabel].forEach { view.addSubview($0) }
         
         let musicImageViewHeightEqualWidthConstraint = musicImageView.heightAnchor.constraint(equalTo: musicImageView.widthAnchor, multiplier: UIConstants.defalutMultiplier)
-        let musicImageViewHeightLessThanOrEqualToSafeAreaHeight = musicImageView.heightAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.3)
+        let musicImageViewHeightLessThanOrEqualToSafeAreaHeight = musicImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: UIConstants.imageViewHeightMultiplier)
         
         musicImageViewHeightLessThanOrEqualToSafeAreaHeight.priority = .defaultHigh
         musicImageViewHeightEqualWidthConstraint.priority = .defaultLow
@@ -141,7 +141,7 @@ final class DetailViewController: UIViewController {
         albumNameLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         NSLayoutConstraint.activate([
-            musicImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIConstants.defaultValue),
+            musicImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIConstants.highValue),
             musicImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
             musicImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.defaultValue),
             musicImageViewHeightEqualWidthConstraint,

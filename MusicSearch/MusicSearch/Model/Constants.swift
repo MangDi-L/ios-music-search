@@ -12,6 +12,7 @@ enum UIConstants {
     static let highValue: CGFloat = 20
     static let defalutMultiplier: CGFloat = 1
     static let labelWidthMulitplier: CGFloat = 0.2
+    static let imageViewHeightMultiplier: CGFloat = 0.3
 }
 
 enum HTTPMethod {
