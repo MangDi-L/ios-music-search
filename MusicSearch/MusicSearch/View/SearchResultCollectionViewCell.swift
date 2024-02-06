@@ -17,6 +17,9 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     private lazy var musicTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.textAlignment = .center
+        label.numberOfLines = 2
         return label
     }()
     

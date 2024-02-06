@@ -43,7 +43,6 @@ final class SearchResultViewController: UIViewController {
     private func setupSearchResultCollectionView() {
         searchResultCollectionView.backgroundColor = .white
         searchResultCollectionView.dataSource = self
-        // 지울수도있음
         searchResultCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: Cell.searchResultCollectionViewCellIdentifier)
     }
     
@@ -57,10 +56,10 @@ final class SearchResultViewController: UIViewController {
                                                            bottom: UIConstants.defaultValue,
                                                            trailing: UIConstants.defaultValue)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(0.15))
+                                               heightDimension: .fractionalHeight(0.2))
         let layoutGruop = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                              subitem: layoutItem,
-                                                             count: 4)
+                                                             count: 3)
         let layoutSection = NSCollectionLayoutSection(group: layoutGruop)
         let compositionalLayout = UICollectionViewCompositionalLayout(section: layoutSection)
         return compositionalLayout
