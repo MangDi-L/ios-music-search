@@ -43,6 +43,7 @@ final class SearchResultViewController: UIViewController {
     private func setupSearchResultCollectionView() {
         searchResultCollectionView.backgroundColor = .white
         searchResultCollectionView.dataSource = self
+        searchResultCollectionView.delegate = self
         searchResultCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: Cell.searchResultCollectionViewCellIdentifier)
     }
     
@@ -85,5 +86,13 @@ extension SearchResultViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.searchResultCollectionViewCellIdentifier, for: indexPath) as? SearchResultCollectionViewCell ?? SearchResultCollectionViewCell()
         cell.setupCellData(data: musicData[indexPath.item])
         return cell
+    }
+}
+
+extension SearchResultViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailVC = DetailViewController()
+        detailVC.musicData = musicData[indexPath.row]
+        presentingViewController?.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
