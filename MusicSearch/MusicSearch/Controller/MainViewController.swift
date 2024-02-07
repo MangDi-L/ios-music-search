@@ -68,7 +68,7 @@ final class MainViewController: UIViewController {
             switch result {
             case .success(let data):
                 guard let data else { return }
-                self.musicData = data
+                self.musicData = sortingMusicLatestDate(musics: data)
                 DispatchQueue.main.async {
                     self.mainTableView.reloadData()
                 }
@@ -78,6 +78,13 @@ final class MainViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func sortingMusicLatestDate(musics: [Music]) -> [Music] {
+        let sortedMusics = musics.sorted {
+            return $0.releaseDate ?? "" > $1.releaseDate ?? ""
+        }
+        return sortedMusics
     }
     
     private func setupAutoLayout() {
