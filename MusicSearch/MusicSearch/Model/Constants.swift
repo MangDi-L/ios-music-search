@@ -26,7 +26,7 @@ enum Cell {
 }
 
 enum MusicApi {
-    static let url = "https://itunes.apple.com/search?media=music&term="
+    static let url = "https://itunes.apple.com/search?media=music&limit=200&country=KR&term="
 }
 
 enum MusicInformation {
@@ -38,4 +38,8 @@ enum MusicInformation {
 enum TimeConstants {
     static let thousand: Double = 1000
     static let sixty: Double = 60
+}
+
+enum Number {
+    static let ten = 10
 }
