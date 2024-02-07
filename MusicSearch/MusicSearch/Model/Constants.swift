@@ -15,6 +15,11 @@ enum UIConstants {
     static let imageViewHeightMultiplier: CGFloat = 0.3
 }
 
+enum NavigationBarText {
+    static let title = "Music Search"
+    static let rightBarButtonTitle = "최신순"
+}
+
 enum HTTPMethod {
     static let get = "GET"
 }
@@ -42,4 +47,9 @@ enum TimeConstants {
 
 enum Number {
     static let ten = 10
+}
+
+enum SystemImage {
+    static let arrowUp = "arrowtriangle.up.square"
+    static let arrowDown = "arrowtriangle.down.square"
 }

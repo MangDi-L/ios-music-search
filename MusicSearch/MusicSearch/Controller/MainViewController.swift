@@ -42,7 +42,23 @@ final class MainViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        title = "Music Search"
+        title = NavigationBarText.title
+        navigationItem.rightBarButtonItem = setupRightBarButtonItem()
+    }
+    
+    private func setupRightBarButtonItem() -> UIBarButtonItem {
+        let button = UIButton(type: .custom)
+        guard let systemImage = UIImage(systemName: SystemImage.arrowUp) else { return UIBarButtonItem() }
+        button.setImage(systemImage, for: .normal)
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.preferredFont(forTextStyle: .caption1),
+            .foregroundColor: UIColor.black
+        ]
+        button.setAttributedTitle(NSAttributedString(string: NavigationBarText.rightBarButtonTitle, attributes: attributes), for: .normal)
+        button.tintColor = .systemOrange
+        button.frame = CGRect(x: 0, y: 0, width: systemImage.size.width, height: systemImage.size.height)
+        
+        return UIBarButtonItem(customView: button)
     }
     
     private func setupSearchBar() {
