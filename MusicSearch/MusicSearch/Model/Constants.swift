@@ -18,6 +18,7 @@ enum UIConstants {
 enum NavigationBarText {
     static let title = "Music Search"
     static let rightBarButtonTitle = "최신순"
+    static let searchBarPlaceHolder = "Enter the music title"
 }
 
 enum HTTPMethod {

@@ -13,8 +13,13 @@ final class MainViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    private lazy var rightBarButtonItem: UIBarButtonItem = {
+        let item = setupRightBarButtonItem(isActivation: true)
+        return item
+    }()
     private let searchResultVC = SearchResultViewController()
     private var musicData: [Music] = []
+    private var isActivateLatestButton: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,12 +48,20 @@ final class MainViewController: UIViewController {
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         title = NavigationBarText.title
-        navigationItem.rightBarButtonItem = setupRightBarButtonItem()
+        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
-    private func setupRightBarButtonItem() -> UIBarButtonItem {
+    private func setupRightBarButtonItem(isActivation: Bool) -> UIBarButtonItem {
         let button = UIButton(type: .custom)
-        guard let systemImage = UIImage(systemName: SystemImage.arrowUp) else { return UIBarButtonItem() }
+        let systemImage: UIImage
+        if isActivation {
+            guard let image = UIImage(systemName: SystemImage.arrowDown) else { return UIBarButtonItem() }
+            systemImage = image
+        } else {
+            guard let image = UIImage(systemName: SystemImage.arrowUp) else { return UIBarButtonItem() }
+            systemImage = image
+        }
+        
         button.setImage(systemImage, for: .normal)
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.preferredFont(forTextStyle: .caption1),
@@ -57,6 +70,7 @@ final class MainViewController: UIViewController {
         button.setAttributedTitle(NSAttributedString(string: NavigationBarText.rightBarButtonTitle, attributes: attributes), for: .normal)
         button.tintColor = .systemOrange
         button.frame = CGRect(x: 0, y: 0, width: systemImage.size.width, height: systemImage.size.height)
+        button.addTarget(self, action: #selector(touchupRightBarButtonItem), for: .touchUpInside)
         
         return UIBarButtonItem(customView: button)
     }
@@ -65,7 +79,7 @@ final class MainViewController: UIViewController {
         let mainSearchController = UISearchController(searchResultsController: self.searchResultVC)
         navigationItem.searchController = mainSearchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        mainSearchController.searchBar.placeholder = "Enter the music title"
+        mainSearchController.searchBar.placeholder = NavigationBarText.searchBarPlaceHolder
         mainSearchController.searchBar.searchBarStyle = .default
         mainSearchController.searchBar.autocapitalizationType = .none
         mainSearchController.hidesNavigationBarDuringPresentation = false
@@ -84,7 +98,7 @@ final class MainViewController: UIViewController {
             switch result {
             case .success(let data):
                 guard let data else { return }
-                self.musicData = sortingMusicLatestDate(musics: data)
+                self.musicData = sortingMusicLatestDate(musics: data, isLatest: true)
                 DispatchQueue.main.async {
                     self.mainTableView.reloadData()
                 }
@@ -96,11 +110,18 @@ final class MainViewController: UIViewController {
         }
     }
     
-    private func sortingMusicLatestDate(musics: [Music]) -> [Music] {
-        let sortedMusics = musics.sorted {
-            return $0.releaseDate ?? "" > $1.releaseDate ?? ""
+    private func sortingMusicLatestDate(musics: [Music], isLatest: Bool) -> [Music] {
+        if isLatest {
+            let sortedMusics = musics.sorted {
+                return $0.releaseDate ?? "" > $1.releaseDate ?? ""
+            }
+            return sortedMusics
+        } else {
+            let sortedMusics = musics.sorted {
+                return $0.releaseDate ?? "" < $1.releaseDate ?? ""
+            }
+            return sortedMusics
         }
-        return sortedMusics
     }
     
     private func setupAutoLayout() {
@@ -111,6 +132,15 @@ final class MainViewController: UIViewController {
             mainTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             mainTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    @objc private func touchupRightBarButtonItem() {
+        isActivateLatestButton.toggle()
+        navigationItem.rightBarButtonItem = setupRightBarButtonItem(isActivation: isActivateLatestButton)
+        self.musicData = sortingMusicLatestDate(musics: self.musicData, isLatest: isActivateLatestButton)
+        DispatchQueue.main.async { [weak self] in
+            self?.mainTableView.reloadData()
+        }
     }
 }
 
