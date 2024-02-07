@@ -14,12 +14,12 @@ final class MainViewController: UIViewController {
         return tableView
     }()
     private lazy var rightBarButtonItem: UIBarButtonItem = {
-        let item = setupRightBarButtonItem(isActivation: true)
+        let item = setupRightBarButtonItem(isActivation: isActivateLatestButton)
         return item
     }()
     private let searchResultVC = SearchResultViewController()
     private var musicData: [Music] = []
-    private var isActivateLatestButton: Bool = true
+    var isActivateLatestButton: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,16 +110,12 @@ final class MainViewController: UIViewController {
         }
     }
     
-    private func sortingMusicLatestDate(musics: [Music], isLatest: Bool) -> [Music] {
+    func sortingMusicLatestDate(musics: [Music], isLatest: Bool) -> [Music] {
         if isLatest {
-            let sortedMusics = musics.sorted {
-                return $0.releaseDate ?? "" > $1.releaseDate ?? ""
-            }
+            let sortedMusics = musics.sorted { return $0.releaseDate ?? "" > $1.releaseDate ?? "" }
             return sortedMusics
         } else {
-            let sortedMusics = musics.sorted {
-                return $0.releaseDate ?? "" < $1.releaseDate ?? ""
-            }
+            let sortedMusics = musics.sorted { return $0.releaseDate ?? "" < $1.releaseDate ?? "" }
             return sortedMusics
         }
     }
@@ -140,6 +136,13 @@ final class MainViewController: UIViewController {
         self.musicData = sortingMusicLatestDate(musics: self.musicData, isLatest: isActivateLatestButton)
         DispatchQueue.main.async { [weak self] in
             self?.mainTableView.reloadData()
+        }
+        
+        let musicData = searchResultVC.musicData
+        let sortedMusicData = sortingMusicLatestDate(musics: musicData, isLatest: isActivateLatestButton)
+        searchResultVC.musicData = sortedMusicData
+        DispatchQueue.main.async {
+            self.searchResultVC.searchResultCollectionView.reloadData()
         }
     }
 }

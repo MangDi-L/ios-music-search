@@ -8,13 +8,13 @@
 import UIKit
 
 final class SearchResultViewController: UIViewController {
-    private lazy var searchResultCollectionView: UICollectionView = {
+    lazy var searchResultCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeSearchResultCollectionViewLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
     
-    private var musicData: [Music] = []
+    var musicData: [Music] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +28,9 @@ final class SearchResultViewController: UIViewController {
             switch result {
             case .success(let data):
                 guard let data else { return }
-                self.musicData = data
                 DispatchQueue.main.async {
+                    guard let mainVC = self.presentingViewController as? MainViewController else { return }
+                    self.musicData = mainVC.sortingMusicLatestDate(musics: data, isLatest: mainVC.isActivateLatestButton)
                     self.searchResultCollectionView.reloadData()
                 }
             case .failure(let error):
