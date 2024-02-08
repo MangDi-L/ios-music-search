@@ -8,6 +8,15 @@
 import UIKit
 
 final class SearchResultCollectionViewCell: UICollectionViewCell {
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        indicator.style = .medium
+        indicator.startAnimating()
+        return indicator
+    }()
+    
     private lazy var musicImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -42,6 +51,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        loadingIndicator.startAnimating()
         musicImageView.image = nil
         musicTitleLabel.text = nil
         musicArtistNameLabel.text = nil
@@ -65,6 +75,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
                 // 다운로드를 시작한 순간의 url과 이미지가 다운로드 완료된 시점의 url이 동일한지를 확인해주는 코드
                 guard urlString == url.absoluteString else { return }
                 DispatchQueue.main.async {
+                    self.stopLoadingIndicator()
                     self.musicImageView.image = image
                 }
             case .failure(let failure):
@@ -73,13 +84,22 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    private func stopLoadingIndicator() {
+        loadingIndicator.stopAnimating()
+    }
+    
     private func setupAutoLayout() {
         [musicImageView, musicTitleLabel, musicArtistNameLabel].forEach { self.addSubview($0) }
+        musicImageView.addSubview(loadingIndicator)
+        
         NSLayoutConstraint.activate([
             musicImageView.topAnchor.constraint(equalTo: self.topAnchor),
             musicImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             musicImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             musicImageView.heightAnchor.constraint(equalTo: musicImageView.widthAnchor, multiplier: UIConstants.defalutMultiplier),
+            
+            loadingIndicator.centerXAnchor.constraint(equalTo: musicImageView.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: musicImageView.centerYAnchor),
             
             musicTitleLabel.topAnchor.constraint(equalTo: musicImageView.bottomAnchor, constant: UIConstants.defaultValue),
             musicTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),

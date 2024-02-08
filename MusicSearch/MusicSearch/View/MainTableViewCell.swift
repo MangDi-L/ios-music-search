@@ -76,6 +76,7 @@ final class MainTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        loadingIndicator.startAnimating()
         musicImageView.image = nil
         musicTitleLabel.text = nil
         musicArtistNameLabel.text = nil
@@ -94,7 +95,6 @@ final class MainTableViewCell: UITableViewCell {
     
     private func stopLoadingIndicator() {
         loadingIndicator.stopAnimating()
-        loadingIndicator.removeFromSuperview()
     }
     
     private func setupMusicImageView(urlString: String) {
