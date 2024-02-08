@@ -8,6 +8,15 @@
 import UIKit
 
 final class MainTableViewCell: UITableViewCell {
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        indicator.style = .medium
+        indicator.startAnimating()
+        return indicator
+    }()
+    
     private lazy var musicImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,15 +67,11 @@ final class MainTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        setupAutoLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        setupAutoLayout()
     }
     
     override func prepareForReuse() {
@@ -87,6 +92,11 @@ final class MainTableViewCell: UITableViewCell {
         musicReleaseDateLabel.text = data.releaseDateToString
     }
     
+    private func stopLoadingIndicator() {
+        loadingIndicator.stopAnimating()
+        loadingIndicator.removeFromSuperview()
+    }
+    
     private func setupMusicImageView(urlString: String) {
         guard let url = URL(string: urlString)  else { return }
         
@@ -98,6 +108,7 @@ final class MainTableViewCell: UITableViewCell {
                 // 다운로드를 시작한 순간의 url과 이미지가 다운로드 완료된 시점의 url이 동일한지를 확인해주는 코드
                 guard urlString == url.absoluteString else { return }
                 DispatchQueue.main.async {
+                    self.stopLoadingIndicator()
                     self.musicImageView.image = image
                 }
             case .failure(let failure):
@@ -108,11 +119,16 @@ final class MainTableViewCell: UITableViewCell {
     
     private func setupAutoLayout() {
         [musicImageView, labelStackView].forEach { self.addSubview($0) }
+        musicImageView.addSubview(loadingIndicator)
+        
         NSLayoutConstraint.activate([
             musicImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: UIConstants.defaultValue),
             musicImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: UIConstants.defaultValue),
             musicImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -UIConstants.defaultValue),
             musicImageView.widthAnchor.constraint(equalTo: musicImageView.heightAnchor, multiplier: UIConstants.defalutMultiplier),
+            
+            loadingIndicator.centerXAnchor.constraint(equalTo: musicImageView.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: musicImageView.centerYAnchor),
             
             labelStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: UIConstants.defaultValue),
             labelStackView.leadingAnchor.constraint(equalTo: musicImageView.trailingAnchor, constant: UIConstants.defaultValue),

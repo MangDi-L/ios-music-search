@@ -13,10 +13,12 @@ final class MainViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    
     private lazy var rightBarButtonItem: UIBarButtonItem = {
         let item = setupRightBarButtonItem(isActivation: MainViewController.isActivateLatestButton)
         return item
     }()
+    
     private let searchResultVC = SearchResultViewController()
     var mainSearchController: UISearchController = UISearchController()
     var musicData: [Music] = []
@@ -30,7 +32,7 @@ final class MainViewController: UIViewController {
         setupSearchBar()
         setupMainTableView()
         setupAutoLayout()
-        setupMusicData(search: "IU")
+        setupMusicData(search: "uu")
     }
     
     override func viewWillAppear(_ animated: Bool) {
