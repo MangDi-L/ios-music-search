@@ -39,6 +39,11 @@ final class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        navigationItem.searchController?.searchBar.endEditing(true)
+    }
 
     private func setupNavigationBar() {
         let appearance = UINavigationBarAppearance()
@@ -72,7 +77,7 @@ final class MainViewController: UIViewController {
         ]
         button.setAttributedTitle(NSAttributedString(string: NavigationBarText.rightBarButtonTitle, attributes: attributes), for: .normal)
         button.tintColor = .systemOrange
-        button.frame = CGRect(x: 0, y: 0, width: systemImage.size.width, height: systemImage.size.height)
+        button.frame = CGRect(x: .zero, y: .zero, width: systemImage.size.width, height: systemImage.size.height)
         button.addTarget(self, action: #selector(touchupRightBarButtonItem), for: .touchUpInside)
         
         return UIBarButtonItem(customView: button)
@@ -128,7 +133,7 @@ final class MainViewController: UIViewController {
     private func setupAutoLayout() {
         view.addSubview(mainTableView)
         NSLayoutConstraint.activate([
-            mainTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            mainTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIConstants.highValue),
             mainTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             mainTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             mainTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)

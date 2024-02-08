@@ -18,8 +18,14 @@ final class SearchResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         setupAutoLayout()
         setupSearchResultCollectionView()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        navigationItem.searchController?.searchBar.endEditing(true)
     }
     
     func setupMusicData(search: String) {
@@ -58,7 +64,7 @@ final class SearchResultViewController: UIViewController {
                                                            bottom: UIConstants.defaultValue,
                                                            trailing: UIConstants.defaultValue)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(0.2))
+                                               heightDimension: .fractionalHeight(0.3))
         let layoutGruop = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                              subitem: layoutItem,
                                                              count: 3)
@@ -68,12 +74,13 @@ final class SearchResultViewController: UIViewController {
     }
     
     private func setupAutoLayout() {
-        view.addSubview(searchResultCollectionView)
+        [searchResultCollectionView].forEach { view.addSubview($0) }
+        
         NSLayoutConstraint.activate([
-            searchResultCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            searchResultCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIConstants.highValue),
             searchResultCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             searchResultCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            searchResultCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            searchResultCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }

@@ -28,7 +28,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
         label.textAlignment = .center
-        label.numberOfLines = 1
+        label.numberOfLines = 2
         return label
     }()
     
@@ -37,6 +37,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .caption2)
         label.textAlignment = .center
+        label.numberOfLines = 2
         return label
     }()
     
@@ -107,8 +108,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
             
             musicArtistNameLabel.topAnchor.constraint(equalTo: musicTitleLabel.bottomAnchor),
             musicArtistNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            musicArtistNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            musicArtistNameLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            musicArtistNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
 }
