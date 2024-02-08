@@ -87,14 +87,24 @@ final class DetailViewController: UIViewController {
     
     private func setupDetailUI() {
         guard let musicData,
+              let title = musicData.trackName,
               let url = musicData.imageUrl,
-              let playTime = musicData.playTime else { return }
+              let name = musicData.artistName else { return }
         setupMusicImageView(urlString: url)
-        musicPlayTime.text = calculateMusicPlayTime(time: playTime)
-        musicTitleLabel.text = musicData.trackName
-        musicArtistNameLabel.text = musicData.artistName
+        musicTitleLabel.text = title
+        musicArtistNameLabel.text = name
         musicAlbumNameLabel.text = musicData.collectionName
         musicReleaseDateLabel.text = musicData.releaseDateToString
+        
+        guard let playTime = musicData.playTime,
+              musicData.releaseDate != nil,
+              musicData.collectionName != nil else {
+            musicPlayTime.text = MusicInformation.noExist
+            musicAlbumNameLabel.text = MusicInformation.noExist
+            musicReleaseDateLabel.text = MusicInformation.noExist
+            return
+        }
+        musicPlayTime.text = calculateMusicPlayTime(time: playTime)
     }
     
     private func calculateMusicPlayTime(time: Double) -> String {

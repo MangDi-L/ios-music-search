@@ -39,6 +39,7 @@ enum MusicInformation {
     static let title = "Title"
     static let artist = "Artist"
     static let album = "Album"
+    static let noExist = "-"
 }
 
 enum TimeConstants {

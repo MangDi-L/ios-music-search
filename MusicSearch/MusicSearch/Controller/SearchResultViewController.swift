@@ -30,7 +30,7 @@ final class SearchResultViewController: UIViewController {
                 guard let data else { return }
                 DispatchQueue.main.async {
                     guard let mainVC = self.presentingViewController as? MainViewController else { return }
-                    self.musicData = mainVC.sortingMusicLatestDate(musics: data, isLatest: mainVC.isActivateLatestButton)
+                    self.musicData = mainVC.sortingMusicLatestDate(musics: data, isLatest: MainViewController.isActivateLatestButton)
                     self.searchResultCollectionView.reloadData()
                 }
             case .failure(let error):

@@ -14,12 +14,12 @@ final class MainViewController: UIViewController {
         return tableView
     }()
     private lazy var rightBarButtonItem: UIBarButtonItem = {
-        let item = setupRightBarButtonItem(isActivation: isActivateLatestButton)
+        let item = setupRightBarButtonItem(isActivation: MainViewController.isActivateLatestButton)
         return item
     }()
     private let searchResultVC = SearchResultViewController()
     private var musicData: [Music] = []
-    var isActivateLatestButton: Bool = true
+    static var isActivateLatestButton: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +98,7 @@ final class MainViewController: UIViewController {
             switch result {
             case .success(let data):
                 guard let data else { return }
-                self.musicData = sortingMusicLatestDate(musics: data, isLatest: true)
+                self.musicData = sortingMusicLatestDate(musics: data, isLatest: MainViewController.isActivateLatestButton)
                 DispatchQueue.main.async {
                     self.mainTableView.reloadData()
                 }
@@ -131,15 +131,15 @@ final class MainViewController: UIViewController {
     }
     
     @objc private func touchupRightBarButtonItem() {
-        isActivateLatestButton.toggle()
-        navigationItem.rightBarButtonItem = setupRightBarButtonItem(isActivation: isActivateLatestButton)
-        self.musicData = sortingMusicLatestDate(musics: self.musicData, isLatest: isActivateLatestButton)
+        MainViewController.isActivateLatestButton.toggle()
+        navigationItem.rightBarButtonItem = setupRightBarButtonItem(isActivation: MainViewController.isActivateLatestButton)
+        self.musicData = sortingMusicLatestDate(musics: self.musicData, isLatest: MainViewController.isActivateLatestButton)
         DispatchQueue.main.async { [weak self] in
             self?.mainTableView.reloadData()
         }
         
         let musicData = searchResultVC.musicData
-        let sortedMusicData = sortingMusicLatestDate(musics: musicData, isLatest: isActivateLatestButton)
+        let sortedMusicData = sortingMusicLatestDate(musics: musicData, isLatest: MainViewController.isActivateLatestButton)
         searchResultVC.musicData = sortedMusicData
         DispatchQueue.main.async {
             self.searchResultVC.searchResultCollectionView.reloadData()
