@@ -63,3 +63,7 @@ enum UIColorExtension {
     static let moreSingerButtonHex = "#34ebde"
     static let moreSingerButtonAlpha = 0.5
 }
+
+enum AnimationTimeConstants {
+    static let basic = 0.3
+}

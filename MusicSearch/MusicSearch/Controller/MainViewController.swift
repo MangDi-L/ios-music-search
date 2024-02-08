@@ -8,7 +8,7 @@
 import UIKit
 
 final class MainViewController: UIViewController {
-    private let mainTableView: UITableView = {
+    let mainTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -18,6 +18,7 @@ final class MainViewController: UIViewController {
         return item
     }()
     private let searchResultVC = SearchResultViewController()
+    var mainSearchController: UISearchController = UISearchController()
     private var musicData: [Music] = []
     static var isActivateLatestButton: Bool = true
 
@@ -29,11 +30,11 @@ final class MainViewController: UIViewController {
         setupSearchBar()
         setupMainTableView()
         setupAutoLayout()
+        setupMusicData(search: "IU")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupMusicData()
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 
@@ -76,9 +77,7 @@ final class MainViewController: UIViewController {
     }
     
     private func setupSearchBar() {
-        let mainSearchController = UISearchController(searchResultsController: self.searchResultVC)
-        navigationItem.searchController = mainSearchController
-        navigationItem.hidesSearchBarWhenScrolling = false
+        mainSearchController = UISearchController(searchResultsController: self.searchResultVC)
         mainSearchController.searchBar.placeholder = NavigationBarText.searchBarPlaceHolder
         mainSearchController.searchBar.searchBarStyle = .default
         mainSearchController.searchBar.autocapitalizationType = .none
@@ -86,6 +85,8 @@ final class MainViewController: UIViewController {
         mainSearchController.searchResultsUpdater = self
         mainSearchController.searchBar.autocorrectionType = .no
         mainSearchController.searchBar.spellCheckingType = .no
+        navigationItem.searchController = mainSearchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     private func setupMainTableView() {
@@ -94,8 +95,8 @@ final class MainViewController: UIViewController {
         mainTableView.register(MainTableViewCell.self, forCellReuseIdentifier: Cell.mainTableViewCellIdentifier)
     }
     
-    private func setupMusicData() {
-        NetworkManager.shared.fetchMusicData(search: "IU") { [weak self] result in
+    func setupMusicData(search: String) {
+        NetworkManager.shared.fetchMusicData(search: search) { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let data):

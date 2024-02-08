@@ -78,6 +78,7 @@ final class DetailViewController: UIViewController {
         button.tintColor = .systemOrange
         button.layer.cornerRadius = UIConstants.moreSingerButtonConerRadius
         button.backgroundColor = UIColor(hex: UIColorExtension.moreSingerButtonHex, alpha: UIColorExtension.moreSingerButtonAlpha)
+        button.addTarget(self, action: #selector(touchupMoreSingersMusicButotn), for: .touchUpInside)
         return button
     }()
     
@@ -225,5 +226,18 @@ final class DetailViewController: UIViewController {
             moreSingersMusicButotn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
             moreSingersMusicButotn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.defaultValue)
         ])
+    }
+    
+    @objc private func touchupMoreSingersMusicButotn() {
+        DispatchQueue.main.async { [weak self] in
+            guard let mainVC = self?.navigationController?.topViewController as? MainViewController else { return }
+            mainVC.navigationItem.searchController?.searchBar.text = ""
+            mainVC.setupMusicData(search: self?.musicArtistNameLabel.text ?? "")
+            mainVC.mainSearchController.searchBar.placeholder = self?.musicArtistNameLabel.text ?? ""
+            UIView.animate(withDuration: AnimationTimeConstants.basic) {
+                mainVC.mainTableView.setContentOffset(.zero, animated: true)
+            }
+        }
+        navigationController?.popToRootViewController(animated: true)
     }
 }
