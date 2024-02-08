@@ -84,6 +84,8 @@ final class MainViewController: UIViewController {
         mainSearchController.searchBar.autocapitalizationType = .none
         mainSearchController.hidesNavigationBarDuringPresentation = false
         mainSearchController.searchResultsUpdater = self
+        mainSearchController.searchBar.autocorrectionType = .no
+        mainSearchController.searchBar.spellCheckingType = .no
     }
     
     private func setupMainTableView() {
