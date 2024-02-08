@@ -19,7 +19,7 @@ final class MainViewController: UIViewController {
     }()
     private let searchResultVC = SearchResultViewController()
     var mainSearchController: UISearchController = UISearchController()
-    private var musicData: [Music] = []
+    var musicData: [Music] = []
     static var isActivateLatestButton: Bool = true
 
     override func viewDidLoad() {

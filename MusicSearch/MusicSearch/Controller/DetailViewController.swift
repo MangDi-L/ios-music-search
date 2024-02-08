@@ -232,6 +232,8 @@ final class DetailViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             guard let mainVC = self?.navigationController?.topViewController as? MainViewController else { return }
             mainVC.navigationItem.searchController?.searchBar.text = ""
+            mainVC.musicData = []
+            mainVC.mainTableView.reloadData()
             mainVC.setupMusicData(search: self?.musicArtistNameLabel.text ?? "")
             mainVC.mainSearchController.searchBar.placeholder = self?.musicArtistNameLabel.text ?? ""
             UIView.animate(withDuration: AnimationTimeConstants.basic) {
