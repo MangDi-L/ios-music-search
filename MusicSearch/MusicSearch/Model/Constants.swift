@@ -13,6 +13,7 @@ enum UIConstants {
     static let defalutMultiplier: CGFloat = 1
     static let labelWidthMulitplier: CGFloat = 0.2
     static let imageViewHeightMultiplier: CGFloat = 0.3
+    static let moreSingerButtonConerRadius: CGFloat = 15
 }
 
 enum NavigationBarText {
@@ -40,6 +41,7 @@ enum MusicInformation {
     static let artist = "Artist"
     static let album = "Album"
     static let noExist = "-"
+    static let moreSinger = "의 노래더보기"
 }
 
 enum TimeConstants {
@@ -48,10 +50,16 @@ enum TimeConstants {
 }
 
 enum Number {
+    static let two = 2
     static let ten = 10
 }
 
 enum SystemImage {
     static let arrowUp = "arrowtriangle.up.square"
     static let arrowDown = "arrowtriangle.down.square"
+}
+
+enum UIColorExtension {
+    static let moreSingerButtonHex = "#34ebde"
+    static let moreSingerButtonAlpha = 0.5
 }
