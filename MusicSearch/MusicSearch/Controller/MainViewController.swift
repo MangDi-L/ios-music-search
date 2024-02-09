@@ -19,10 +19,11 @@ final class MainViewController: UIViewController {
         return item
     }()
     
+    static var isActivateLatestButton: Bool = true
     private let searchResultVC = SearchResultViewController()
     var mainSearchController: UISearchController = UISearchController()
     var musicData: [Music] = []
-    static var isActivateLatestButton: Bool = true
+    var mainTableViewBottomConstraint: NSLayoutConstraint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,7 @@ final class MainViewController: UIViewController {
         setupMainTableView()
         setupAutoLayout()
         setupMusicData(search: "uu")
+        setupKeyboardNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,13 +132,21 @@ final class MainViewController: UIViewController {
         }
     }
     
+    private func setupKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardMoveUpAction), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardMoveDownAction), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     private func setupAutoLayout() {
         view.addSubview(mainTableView)
+        
+        mainTableViewBottomConstraint = mainTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        mainTableViewBottomConstraint?.isActive = true
+        
         NSLayoutConstraint.activate([
             mainTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIConstants.highValue),
             mainTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            mainTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            mainTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            mainTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
     
@@ -154,6 +164,30 @@ final class MainViewController: UIViewController {
         DispatchQueue.main.async {
             self.searchResultVC.searchResultCollectionView.reloadData()
         }
+    }
+    
+    @objc private func keyboardMoveUpAction(notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            
+            mainTableViewBottomConstraint?.constant = -keyboardHeight
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc private func keyboardMoveDownAction(notification: Notification) {
+        mainTableViewBottomConstraint?.constant = 0
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
 
