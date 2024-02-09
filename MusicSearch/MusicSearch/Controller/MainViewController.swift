@@ -172,15 +172,15 @@ final class MainViewController: UIViewController {
             let keyboardHeight = keyboardRectangle.height
             
             mainTableViewBottomConstraint?.constant = -keyboardHeight
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: AnimationTimeConstants.basic) {
                 self.view.layoutIfNeeded()
             }
         }
     }
     
     @objc private func keyboardMoveDownAction(notification: Notification) {
-        mainTableViewBottomConstraint?.constant = 0
-        UIView.animate(withDuration: 0.2) {
+        mainTableViewBottomConstraint?.constant = .zero
+        UIView.animate(withDuration: AnimationTimeConstants.basic) {
             self.view.layoutIfNeeded()
         }
     }

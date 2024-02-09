@@ -51,6 +51,8 @@ enum TimeConstants {
 
 enum Number {
     static let two = 2
+    static let three = 3
+    static let fourPointFive = 4.5
     static let ten = 10
 }
 
@@ -65,5 +67,5 @@ enum UIColorExtension {
 }
 
 enum AnimationTimeConstants {
-    static let basic = 0.3
+    static let basic = 0.2
 }

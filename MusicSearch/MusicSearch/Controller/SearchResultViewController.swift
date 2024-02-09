@@ -15,12 +15,14 @@ final class SearchResultViewController: UIViewController {
     }()
     
     var musicData: [Music] = []
+    var collectionViewBottomConstraint: NSLayoutConstraint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupAutoLayout()
         setupSearchResultCollectionView()
+        setupKeyboardNotification()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -56,25 +58,34 @@ final class SearchResultViewController: UIViewController {
     
     // 상수 고치기
     private func makeSearchResultCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                heightDimension: .fractionalHeight(1))
+        let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(UIConstants.defalutMultiplier),
+                                                heightDimension: .fractionalHeight(UIConstants.defalutMultiplier))
         let layoutItem = NSCollectionLayoutItem(layoutSize: layoutSize)
         layoutItem.contentInsets = NSDirectionalEdgeInsets(top: UIConstants.defaultValue,
                                                            leading: UIConstants.defaultValue,
                                                            bottom: UIConstants.defaultValue,
                                                            trailing: UIConstants.defaultValue)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(0.3))
+        let groupHight = view.frame.height / Number.fourPointFive
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(UIConstants.defalutMultiplier),
+                                               heightDimension: .absolute(groupHight))
         let layoutGruop = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                              subitem: layoutItem,
-                                                             count: 3)
+                                                             count: Number.three)
         let layoutSection = NSCollectionLayoutSection(group: layoutGruop)
         let compositionalLayout = UICollectionViewCompositionalLayout(section: layoutSection)
         return compositionalLayout
     }
     
+    private func setupKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardMoveUpAction), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardMoveDownAction), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     private func setupAutoLayout() {
         [searchResultCollectionView].forEach { view.addSubview($0) }
+        
+        collectionViewBottomConstraint = searchResultCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        collectionViewBottomConstraint?.isActive = true
         
         NSLayoutConstraint.activate([
             searchResultCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: UIConstants.highValue),
@@ -82,6 +93,30 @@ final class SearchResultViewController: UIViewController {
             searchResultCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             searchResultCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    @objc private func keyboardMoveUpAction(notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            
+            collectionViewBottomConstraint?.constant = -keyboardHeight
+            UIView.animate(withDuration: AnimationTimeConstants.basic) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc private func keyboardMoveDownAction(notification: Notification) {
+        collectionViewBottomConstraint?.constant = .zero
+        UIView.animate(withDuration: AnimationTimeConstants.basic) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
 
