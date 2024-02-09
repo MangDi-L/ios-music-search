@@ -36,11 +36,7 @@ final class MainViewController: UIViewController {
         setupMusicData(search: "uu")
         setupKeyboardNotification()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
+
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -58,6 +54,7 @@ final class MainViewController: UIViewController {
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         title = NavigationBarText.title
+        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
@@ -205,7 +202,7 @@ extension MainViewController: UITableViewDataSource {
 
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let height = view.safeAreaLayoutGuide.layoutFrame.height / Cell.cellHeightDevidingValue
+        let height = view.frame.height / Cell.tableCellHeightDevidingValue
         return height
     }
     

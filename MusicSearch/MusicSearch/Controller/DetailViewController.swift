@@ -93,7 +93,6 @@ final class DetailViewController: UIViewController {
         view.backgroundColor = .white
         setupAutoLayout()
         setupMoreSingersMusicButotn()
-        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     private func setupMoreSingersMusicButotn() {
@@ -115,6 +114,7 @@ final class DetailViewController: UIViewController {
               let title = musicData.trackName,
               let url = musicData.imageUrl,
               let name = musicData.artistName else { return }
+        self.title = title
         setupMusicImageView(urlString: url)
         musicTitleLabel.text = title
         musicArtistNameLabel.text = name

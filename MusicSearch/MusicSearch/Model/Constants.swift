@@ -29,7 +29,7 @@ enum HTTPMethod {
 enum Cell {
     static let mainTableViewCellIdentifier = "MainTableViewCell"
     static let searchResultCollectionViewCellIdentifier = "searchResultCollectionViewCell"
-    static let cellHeightDevidingValue: CGFloat = 5
+    static let tableCellHeightDevidingValue: CGFloat = 7
 }
 
 enum MusicApi {
