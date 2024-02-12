@@ -36,6 +36,10 @@ enum MusicApi {
     static let url = "https://itunes.apple.com/search?media=music&limit=200&country=KR&term="
 }
 
+enum Keys {
+    static let searchbarTextKey = "searchbarTextKey"
+}
+
 enum MusicInformation {
     static let title = "Title"
     static let artist = "Artist"

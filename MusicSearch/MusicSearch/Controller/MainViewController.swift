@@ -31,12 +31,11 @@ final class MainViewController: UIViewController {
         view.backgroundColor = .white
         setupNavigationBar()
         setupSearchBar()
+        setupLatelySearching()
         setupMainTableView()
         setupAutoLayout()
-        setupMusicData(search: "iu")
         setupKeyboardNotification()
     }
-
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -93,6 +92,15 @@ final class MainViewController: UIViewController {
         mainSearchController.searchBar.spellCheckingType = .no
         navigationItem.searchController = mainSearchController
         navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
+    private func setupLatelySearching() {
+        guard let text = UserDefaults.standard.string(forKey: Keys.searchbarTextKey) else {
+            setupMusicData(search: "")
+            return
+        }
+        setupMusicData(search: text)
+        mainSearchController.searchBar.placeholder = text
     }
     
     private func setupMainTableView() {
@@ -217,5 +225,6 @@ extension MainViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchResultVC = searchController.searchResultsController as? SearchResultViewController ?? SearchResultViewController()
         searchResultVC.setupMusicData(search: searchController.searchBar.text ?? "")
+        UserDefaults.standard.setValue(searchController.searchBar.text, forKey: Keys.searchbarTextKey)
     }
 }
