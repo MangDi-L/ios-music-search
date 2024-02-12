@@ -66,22 +66,8 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupMusicImageView(urlString: String) {
-        guard let url = URL(string: urlString)  else { return }
-        
-        NetworkManager.shared.fetchImageData(url: urlString) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let data):
-                let image = UIImage(data: data)
-                // 다운로드를 시작한 순간의 url과 이미지가 다운로드 완료된 시점의 url이 동일한지를 확인해주는 코드
-                guard urlString == url.absoluteString else { return }
-                DispatchQueue.main.async {
-                    self.stopLoadingIndicator()
-                    self.musicImageView.image = image
-                }
-            case .failure(let failure):
-                print("이미지 "+failure.rawValue)
-            }
+        musicImageView.setupMusicImageView(urlString: urlString) { [weak self] in
+            self?.stopLoadingIndicator()
         }
     }
     
