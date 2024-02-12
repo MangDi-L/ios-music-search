@@ -10,6 +10,7 @@
 		1BAE40E82B72060400B4CD56 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE40E72B72060400B4CD56 /* DetailViewController.swift */; };
 		1BC195D12B7484E6002EE44B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC195D02B7484E6002EE44B /* UIColor+Extension.swift */; };
 		1BC557072B7A2E9100C0D039 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC557062B7A2E9100C0D039 /* ImageCacheManager.swift */; };
+		1BC557092B7A3B2A00C0D039 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC557082B7A3B2A00C0D039 /* UIImageView+Extension.swift */; };
 		1BD7C5882B6BE7C200B0C0C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7C5872B6BE7C200B0C0C7 /* AppDelegate.swift */; };
 		1BD7C58A2B6BE7C200B0C0C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7C5892B6BE7C200B0C0C7 /* SceneDelegate.swift */; };
 		1BD7C58C2B6BE7C200B0C0C7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7C58B2B6BE7C200B0C0C7 /* MainViewController.swift */; };
@@ -30,6 +31,7 @@
 		1BAE40E72B72060400B4CD56 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1BC195D02B7484E6002EE44B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		1BC557062B7A2E9100C0D039 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		1BC557082B7A3B2A00C0D039 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		1BD7C5842B6BE7C200B0C0C7 /* MusicSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BD7C5872B6BE7C200B0C0C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BD7C5892B6BE7C200B0C0C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				1BC195D02B7484E6002EE44B /* UIColor+Extension.swift */,
+				1BC557082B7A3B2A00C0D039 /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			files = (
 				1BAE40E82B72060400B4CD56 /* DetailViewController.swift in Sources */,
 				1BD7C58C2B6BE7C200B0C0C7 /* MainViewController.swift in Sources */,
+				1BC557092B7A3B2A00C0D039 /* UIImageView+Extension.swift in Sources */,
 				1BF4711B2B70975D00A54012 /* NetworkError.swift in Sources */,
 				1BC195D12B7484E6002EE44B /* UIColor+Extension.swift in Sources */,
 				1BF4711F2B70AD5B00A54012 /* SearchResultViewController.swift in Sources */,

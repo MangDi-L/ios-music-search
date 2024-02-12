@@ -53,6 +53,7 @@ enum Number {
     static let two = 2
     static let three = 3
     static let fourPointFive = 4.5
+    static let eight = 8
     static let ten = 10
 }
 
