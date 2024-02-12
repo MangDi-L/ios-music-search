@@ -132,8 +132,8 @@
 				1BF471122B708BD200A54012 /* Constants.swift */,
 				1BF471142B708DC200A54012 /* MusicModel.swift */,
 				1BF471162B70922B00A54012 /* NetworkManager.swift */,
-				1BF4711A2B70975D00A54012 /* NetworkError.swift */,
 				1BC557062B7A2E9100C0D039 /* ImageCacheManager.swift */,
+				1BF4711A2B70975D00A54012 /* NetworkError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

@@ -33,7 +33,7 @@ final class MainViewController: UIViewController {
         setupSearchBar()
         setupMainTableView()
         setupAutoLayout()
-        setupMusicData(search: "uu")
+        setupMusicData(search: "iu")
         setupKeyboardNotification()
     }
 

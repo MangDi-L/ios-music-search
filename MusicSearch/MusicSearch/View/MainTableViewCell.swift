@@ -98,21 +98,42 @@ final class MainTableViewCell: UITableViewCell {
     }
     
     private func setupMusicImageView(urlString: String) {
-        guard let url = URL(string: urlString)  else { return }
+        let fileManager = FileManager()
+        let imageCacheKey = NSString(string: urlString)
+        guard let url = URL(string: urlString),
+              let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory,
+                                                             .userDomainMask,
+                                                             true).first else { return }
+        var filePath = URL(fileURLWithPath: path)
+        filePath.appendPathComponent(url.pathComponents[8])
         
-        NetworkManager.shared.fetchImageData(url: urlString) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let data):
-                let image = UIImage(data: data)
-                // 다운로드를 시작한 순간의 url과 이미지가 다운로드 완료된 시점의 url이 동일한지를 확인해주는 코드
-                guard urlString == url.absoluteString else { return }
-                DispatchQueue.main.async {
-                    self.stopLoadingIndicator()
-                    self.musicImageView.image = image
+        if let imageCacheValue = ImageCacheManager.shared.object(forKey: imageCacheKey) {
+            stopLoadingIndicator()
+            musicImageView.image = imageCacheValue
+        } else if let loadedImageData = try? Data(contentsOf: filePath),
+                  let image = UIImage(data: loadedImageData) {
+            ImageCacheManager.shared.setObject(image, forKey: imageCacheKey)
+            stopLoadingIndicator()
+            musicImageView.image = image
+        } else {
+            NetworkManager.shared.fetchImageData(url: urlString) { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success(let data):
+                    guard let image = UIImage(data: data) else { return }
+                    // 다운로드를 시작한 순간의 url과 이미지가 다운로드 완료된 시점의 url이 동일한지를 확인해주는 코드
+                    guard urlString == url.absoluteString else { return }
+                    DispatchQueue.main.async {
+                        self.stopLoadingIndicator()
+                        self.musicImageView.image = image
+                    }
+                    ImageCacheManager.shared.setObject(image, forKey: imageCacheKey)
+                    fileManager.createFile(atPath: filePath.path,
+                                           contents: data,
+                                           attributes: nil)
+                case .failure(let failure):
+                    print("이미지 "+failure.rawValue)
                 }
-            case .failure(let failure):
-                print("이미지 "+failure.rawValue)
             }
         }
     }
