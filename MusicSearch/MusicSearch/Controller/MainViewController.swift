@@ -158,8 +158,8 @@ final class MainViewController: UIViewController {
         let musicData = searchResultVC.musicData
         let sortedMusicData = sortingMusicLatestDate(musics: musicData, isLatest: MainViewController.isActivateLatestButton)
         searchResultVC.musicData = sortedMusicData
-        DispatchQueue.main.async {
-            self.searchResultVC.searchResultCollectionView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.searchResultVC.searchResultCollectionView.reloadData()
         }
     }
     
