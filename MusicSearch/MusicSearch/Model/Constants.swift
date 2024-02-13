@@ -54,6 +54,7 @@ enum TimeConstants {
 }
 
 enum Number {
+    static let one = 1
     static let two = 2
     static let three = 3
     static let fourPointFive = 4.5
@@ -64,6 +65,8 @@ enum Number {
 enum SystemImage {
     static let arrowUp = "arrowtriangle.up.square"
     static let arrowDown = "arrowtriangle.down.square"
+    static let search = "magnifyingglass"
+    static let heart = "heart"
 }
 
 enum UIColorExtension {
@@ -73,4 +76,9 @@ enum UIColorExtension {
 
 enum AnimationTimeConstants {
     static let basic = 0.2
+}
+
+enum TabbarItemTitle {
+    static let first = "Music Search"
+    static let second = "Favorite"
 }

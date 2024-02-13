@@ -15,10 +15,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        window = UIWindow(windowScene: windowScene)
-        let viewController = UINavigationController(rootViewController: MainViewController())
-
-        window?.rootViewController = viewController
+        let tabBarVC = UITabBarController()
+        
+        let vc1 = UINavigationController(rootViewController: MainViewController())
+        let vc2 = FavoriteViewController()
+        
+        vc1.title = TabbarItemTitle.first
+        vc2.title = TabbarItemTitle.second
+        
+        tabBarVC.setViewControllers([vc1, vc2], animated: false)
+        tabBarVC.modalPresentationStyle = .fullScreen
+        tabBarVC.tabBar.backgroundColor = .systemGroupedBackground
+        
+        guard let items = tabBarVC.tabBar.items else { return }
+        items[.zero].image = UIImage(systemName: SystemImage.search)
+        items[Number.one].image = UIImage(systemName: SystemImage.heart)
+                
+        window?.rootViewController = tabBarVC
         window?.makeKeyAndVisible()
     }
 
