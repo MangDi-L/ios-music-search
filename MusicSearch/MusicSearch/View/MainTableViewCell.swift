@@ -67,6 +67,7 @@ final class MainTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = .tertiarySystemGroupedBackground
         setupAutoLayout()
     }
     

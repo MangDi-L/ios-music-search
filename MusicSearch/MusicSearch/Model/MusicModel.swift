@@ -21,9 +21,6 @@ struct Music: Codable {
     let playTime: Double?
     let releaseDate: String?
     
-    // 2023-04-07T12:00:00Z
-    // 2015-10-23T07:00:00Z
-    // 2014-05-16T07:00:00Z
     var releaseDateToString: String {
         guard let releaseDate,
               let isoDate = ISO8601DateFormatter().date(from: releaseDate) else {

@@ -19,7 +19,7 @@ final class SearchResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGroupedBackground
         setupAutoLayout()
         setupSearchResultCollectionView()
         setupKeyboardNotification()
@@ -50,7 +50,7 @@ final class SearchResultViewController: UIViewController {
     }
     
     private func setupSearchResultCollectionView() {
-        searchResultCollectionView.backgroundColor = .white
+        searchResultCollectionView.backgroundColor = .systemGroupedBackground
         searchResultCollectionView.dataSource = self
         searchResultCollectionView.delegate = self
         searchResultCollectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: Cell.searchResultCollectionViewCellIdentifier)

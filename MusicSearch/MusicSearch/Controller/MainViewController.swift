@@ -28,7 +28,7 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGroupedBackground
         setupNavigationBar()
         setupSearchBar()
         setupLatelySearching()
@@ -70,8 +70,8 @@ final class MainViewController: UIViewController {
         
         button.setImage(systemImage, for: .normal)
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.preferredFont(forTextStyle: .caption1),
-            .foregroundColor: UIColor.black
+            .font: UIFont.preferredFont(forTextStyle: .callout),
+            .foregroundColor: UIColor.systemBrown
         ]
         button.setAttributedTitle(NSAttributedString(string: NavigationBarText.rightBarButtonTitle, attributes: attributes), for: .normal)
         button.tintColor = .systemOrange
