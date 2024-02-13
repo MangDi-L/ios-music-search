@@ -12,6 +12,9 @@
 		1BC557072B7A2E9100C0D039 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC557062B7A2E9100C0D039 /* ImageCacheManager.swift */; };
 		1BC557092B7A3B2A00C0D039 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC557082B7A3B2A00C0D039 /* UIImageView+Extension.swift */; };
 		1BD172222B7B68A200C940AB /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD172212B7B68A100C940AB /* FavoriteViewController.swift */; };
+		1BD172482B7B855A00C940AB /* FavoriteMusicModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1BD172462B7B855A00C940AB /* FavoriteMusicModel.xcdatamodeld */; };
+		1BD172532B7B875D00C940AB /* FavoriteMusicEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD172512B7B875D00C940AB /* FavoriteMusicEntity+CoreDataClass.swift */; };
+		1BD172542B7B875D00C940AB /* FavoriteMusicEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD172522B7B875D00C940AB /* FavoriteMusicEntity+CoreDataProperties.swift */; };
 		1BD7C5882B6BE7C200B0C0C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7C5872B6BE7C200B0C0C7 /* AppDelegate.swift */; };
 		1BD7C58A2B6BE7C200B0C0C7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7C5892B6BE7C200B0C0C7 /* SceneDelegate.swift */; };
 		1BD7C58C2B6BE7C200B0C0C7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD7C58B2B6BE7C200B0C0C7 /* MainViewController.swift */; };
@@ -34,6 +37,9 @@
 		1BC557062B7A2E9100C0D039 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		1BC557082B7A3B2A00C0D039 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		1BD172212B7B68A100C940AB /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		1BD172472B7B855A00C940AB /* FavoriteMusicModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteMusicModel.xcdatamodel; sourceTree = "<group>"; };
+		1BD172512B7B875D00C940AB /* FavoriteMusicEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteMusicEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		1BD172522B7B875D00C940AB /* FavoriteMusicEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteMusicEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		1BD7C5842B6BE7C200B0C0C7 /* MusicSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BD7C5872B6BE7C200B0C0C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BD7C5892B6BE7C200B0C0C7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +146,9 @@
 				1BF471162B70922B00A54012 /* NetworkManager.swift */,
 				1BC557062B7A2E9100C0D039 /* ImageCacheManager.swift */,
 				1BF4711A2B70975D00A54012 /* NetworkError.swift */,
+				1BD172512B7B875D00C940AB /* FavoriteMusicEntity+CoreDataClass.swift */,
+				1BD172522B7B875D00C940AB /* FavoriteMusicEntity+CoreDataProperties.swift */,
+				1BD172462B7B855A00C940AB /* FavoriteMusicModel.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -287,12 +296,15 @@
 				1BF4711F2B70AD5B00A54012 /* SearchResultViewController.swift in Sources */,
 				1BC557072B7A2E9100C0D039 /* ImageCacheManager.swift in Sources */,
 				1BD7C5882B6BE7C200B0C0C7 /* AppDelegate.swift in Sources */,
+				1BD172482B7B855A00C940AB /* FavoriteMusicModel.xcdatamodeld in Sources */,
 				1BF471132B708BD200A54012 /* Constants.swift in Sources */,
 				1BF4711D2B70A57200A54012 /* SearchResultCollectionViewCell.swift in Sources */,
 				1BF471172B70922B00A54012 /* NetworkManager.swift in Sources */,
 				1BF471112B707A2300A54012 /* MainTableViewCell.swift in Sources */,
+				1BD172542B7B875D00C940AB /* FavoriteMusicEntity+CoreDataProperties.swift in Sources */,
 				1BD7C58A2B6BE7C200B0C0C7 /* SceneDelegate.swift in Sources */,
 				1BF471152B708DC200A54012 /* MusicModel.swift in Sources */,
+				1BD172532B7B875D00C940AB /* FavoriteMusicEntity+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +537,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1BD172462B7B855A00C940AB /* FavoriteMusicModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1BD172472B7B855A00C940AB /* FavoriteMusicModel.xcdatamodel */,
+			);
+			currentVersion = 1BD172472B7B855A00C940AB /* FavoriteMusicModel.xcdatamodel */;
+			path = FavoriteMusicModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1BD7C57C2B6BE7C200B0C0C7 /* Project object */;
 }
