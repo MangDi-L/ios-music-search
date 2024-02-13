@@ -22,8 +22,19 @@ extension FavoriteMusicEntity {
     @NSManaged public var trackName: String?
     @NSManaged public var imageUrl: String?
     @NSManaged public var playTime: Double
-    @NSManaged public var releaseDateToString: String?
-
+    @NSManaged public var releaseDate: String?
+    
+    var releaseDateToString: String {
+        guard let releaseDate,
+              let isoDate = ISO8601DateFormatter().date(from: releaseDate) else {
+            return ""
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.string(from: isoDate)
+        return date
+    }
 }
 
 extension FavoriteMusicEntity : Identifiable {

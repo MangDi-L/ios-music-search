@@ -6,7 +6,7 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="imageUrl" optional="YES" attributeType="String"/>
         <attribute name="playTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="releaseDateToString" optional="YES" attributeType="String"/>
+        <attribute name="releaseDate" optional="YES" attributeType="String"/>
         <attribute name="trackName" optional="YES" attributeType="String"/>
     </entity>
 </model>
