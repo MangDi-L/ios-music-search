@@ -44,4 +44,18 @@ final class CoreDataManager {
             return []
         }
     }
+    
+    private func fetchFavoriteMusics() -> [FavoriteMusic] {
+        let favoriteMusicEntities = fetchFavoriteMusicEntities2()
+        let favoriteMusics = favoriteMusicEntities.map {
+            FavoriteMusic(id: $0.id,
+                          artistName: $0.artistName,
+                          collectionName: $0.collectionName,
+                          trackName: $0.trackName,
+                          imageUrl: $0.imageUrl,
+                          playTime: $0.playTime,
+                          releaseDate: $0.releaseDate)
+        }
+        return favoriteMusics
+    }
 }
