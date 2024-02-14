@@ -75,10 +75,25 @@ final class DetailViewController: UIViewController {
     private lazy var moreSingersMusicButotn: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = .systemOrange
+        button.setTitleColor(.systemGray, for: .normal)
         button.layer.cornerRadius = UIConstants.moreSingerButtonConerRadius
         button.backgroundColor = UIColor(hex: UIColorExtension.moreSingerButtonHex, alpha: UIColorExtension.moreSingerButtonAlpha)
         button.addTarget(self, action: #selector(touchupMoreSingersMusicButotn), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var favoritePlusButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .clear
+        button.layer.cornerRadius = UIConstants.moreSingerButtonConerRadius
+        button.layer.borderWidth = UIConstants.buttonBorderWidth
+        button.layer.borderColor = UIColor(hex: UIColorExtension.moreSingerButtonHex, alpha: UIColorExtension.moreSingerButtonAlpha).cgColor
+        button.setImage(UIImage(systemName: SystemImage.heart), for: .normal)
+        button.semanticContentAttribute = .forceLeftToRight
+        button.setTitleColor(.systemGray, for: .normal)
+        button.setTitle(MusicInformation.plusFavoirte, for: .normal)
+//        button.addTarget(self, action: #selector(), for: .touchUpInside)
         return button
     }()
     
@@ -97,8 +112,7 @@ final class DetailViewController: UIViewController {
     
     private func setupMoreSingersMusicButotn() {
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.preferredFont(forTextStyle: .body),
-            .foregroundColor: UIColor.black
+            .font: UIFont.preferredFont(forTextStyle: .body)
         ]
         if let artistName = musicArtistNameLabel.text {
             moreSingersMusicButotn.setAttributedTitle(NSAttributedString(string: "\(artistName) \(MusicInformation.moreSinger)", attributes: attributes), for: .normal)
@@ -172,7 +186,8 @@ final class DetailViewController: UIViewController {
          titleLabel,
          artistNameLabel,
          albumNameLabel,
-         moreSingersMusicButotn].forEach { view.addSubview($0) }
+         moreSingersMusicButotn,
+         favoritePlusButton].forEach { view.addSubview($0) }
         
         let musicImageViewHeightEqualWidthConstraint = musicImageView.heightAnchor.constraint(equalTo: musicImageView.widthAnchor, multiplier: UIConstants.defalutMultiplier)
         let musicImageViewHeightLessThanOrEqualToSafeAreaHeight = musicImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: UIConstants.imageViewHeightMultiplier)
@@ -224,7 +239,13 @@ final class DetailViewController: UIViewController {
             
             moreSingersMusicButotn.topAnchor.constraint(equalTo: musicReleaseDateLabel.bottomAnchor, constant: UIConstants.highValue),
             moreSingersMusicButotn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
-            moreSingersMusicButotn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.defaultValue)
+            moreSingersMusicButotn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.defaultValue),
+            moreSingersMusicButotn.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: UIConstants.buttonHeightMultiplier),
+            
+            favoritePlusButton.topAnchor.constraint(equalTo: moreSingersMusicButotn.bottomAnchor, constant: UIConstants.defaultValue),
+            favoritePlusButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
+            favoritePlusButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.defaultValue),
+            favoritePlusButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: UIConstants.buttonHeightMultiplier)
         ])
     }
     
