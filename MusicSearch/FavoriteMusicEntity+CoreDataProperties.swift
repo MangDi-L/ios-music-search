@@ -20,7 +20,7 @@ extension FavoriteMusicEntity {
     @NSManaged public var artistName: String?
     @NSManaged public var collectionName: String?
     @NSManaged public var trackName: String?
-    @NSManaged public var imageUrl: String?
+    @NSManaged public var imageUrl: URL?
     @NSManaged public var playTime: Double
     @NSManaged public var releaseDate: String?
 }

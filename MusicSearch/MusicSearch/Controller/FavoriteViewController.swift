@@ -8,13 +8,13 @@
 import UIKit
 
 final class FavoriteViewController: UIViewController {
-    private lazy var favoriteTableView: UITableView = {
+    private lazy var favoriteMusicTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
-    private var musicData: [Music] = []
+    private var favoriteMusicData: [FavoriteMusic] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ final class FavoriteViewController: UIViewController {
         setupNavigationBar()
         setupAutoLayout()
         setupFavoriteTableView()
-        setupMusicData()
+        setupFavoriteMusicData()
     }
     
     private func setupNavigationBar() {
@@ -38,35 +38,36 @@ final class FavoriteViewController: UIViewController {
     }
     
     private func setupFavoriteTableView() {
-        favoriteTableView.dataSource = self
-        favoriteTableView.delegate = self
-        favoriteTableView.register(MainTableViewCell.self, forCellReuseIdentifier: Cell.favoriteTableViewCellIdentifier)
+        favoriteMusicTableView.dataSource = self
+        favoriteMusicTableView.delegate = self
+        favoriteMusicTableView.register(MainTableViewCell.self, forCellReuseIdentifier: Cell.favoriteTableViewCellIdentifier)
     }
     
-    private func setupMusicData() {
-        
+    private func setupFavoriteMusicData() {
+        favoriteMusicData = CoreDataManager.shared.fetchFavoriteMusics()
+        favoriteMusicTableView.reloadData()
     }
     
     private func setupAutoLayout() {
-        [favoriteTableView].forEach { view.addSubview($0) }
+        [favoriteMusicTableView].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
-            favoriteTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            favoriteTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            favoriteTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            favoriteTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            favoriteMusicTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            favoriteMusicTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            favoriteMusicTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            favoriteMusicTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }
 
 extension FavoriteViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return musicData.count
+        return favoriteMusicData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cell.favoriteTableViewCellIdentifier, for: indexPath) as? MainTableViewCell ?? MainTableViewCell()
-        cell.setupCellData(data: musicData[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cell.favoriteTableViewCellIdentifier, for: indexPath) as? FavoriteTableViewCell ?? FavoriteTableViewCell()
+        cell.setupCellData(data: favoriteMusicData[indexPath.row])
         return cell
     }
 }

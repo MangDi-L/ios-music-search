@@ -12,7 +12,7 @@ struct FavoriteMusic: Identifiable {
     let artistName: String?
     let collectionName: String?
     let trackName: String?
-    let imageUrl: String?
+    let imageUrl: URL?
     let playTime: Double?
     let releaseDate: String?
     
