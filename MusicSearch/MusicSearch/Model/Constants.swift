@@ -29,6 +29,7 @@ enum HTTPMethod {
 
 enum Cell {
     static let mainTableViewCellIdentifier = "MainTableViewCell"
+    static let favoriteTableViewCellIdentifier = "FavoriteTableViewCell"
     static let searchResultCollectionViewCellIdentifier = "searchResultCollectionViewCell"
     static let tableCellHeightDevidingValue: CGFloat = 7
 }

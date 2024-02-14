@@ -13,12 +13,16 @@ final class FavoriteViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    
+    private var musicData: [Music] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGroupedBackground
         setupNavigationBar()
         setupAutoLayout()
+        setupFavoriteTableView()
+        setupMusicData()
     }
     
     private func setupNavigationBar() {
@@ -33,6 +37,16 @@ final class FavoriteViewController: UIViewController {
 //        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
+    private func setupFavoriteTableView() {
+        favoriteTableView.dataSource = self
+        favoriteTableView.delegate = self
+        favoriteTableView.register(MainTableViewCell.self, forCellReuseIdentifier: Cell.favoriteTableViewCellIdentifier)
+    }
+    
+    private func setupMusicData() {
+        
+    }
+    
     private func setupAutoLayout() {
         [favoriteTableView].forEach { view.addSubview($0) }
         
@@ -42,5 +56,32 @@ final class FavoriteViewController: UIViewController {
             favoriteTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             favoriteTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+}
+
+extension FavoriteViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return musicData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cell.favoriteTableViewCellIdentifier, for: indexPath) as? MainTableViewCell ?? MainTableViewCell()
+        cell.setupCellData(data: musicData[indexPath.row])
+        return cell
+    }
+}
+
+extension FavoriteViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .none:
+            return
+        case .delete:
+            return
+        case .insert:
+            return
+        @unknown default:
+            return
+        }
     }
 }
