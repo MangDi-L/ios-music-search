@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarVC = UITabBarController()
         
         let vc1 = UINavigationController(rootViewController: MainViewController())
-        let vc2 = FavoriteViewController()
+        let vc2 = UINavigationController(rootViewController: FavoriteViewController())
         
         vc1.title = TabbarItemTitle.first
         vc2.title = TabbarItemTitle.second

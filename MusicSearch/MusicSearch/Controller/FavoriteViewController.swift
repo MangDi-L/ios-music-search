@@ -17,7 +17,20 @@ final class FavoriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGroupedBackground
+        setupNavigationBar()
         setupAutoLayout()
+    }
+    
+    private func setupNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .systemGray6
+        navigationController?.navigationBar.tintColor = .systemBlue
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        title = NavigationBarText.secondTitle
+        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
     private func setupAutoLayout() {

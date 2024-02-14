@@ -52,7 +52,7 @@ final class MainViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        title = NavigationBarText.title
+        title = NavigationBarText.firstTitle
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
