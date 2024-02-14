@@ -24,10 +24,10 @@ final class FavoriteViewController: UIViewController {
         [favoriteTableView].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
-            favoriteTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIConstants.defaultValue),
-            favoriteTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
-            favoriteTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: UIConstants.defaultValue),
-            favoriteTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: UIConstants.defaultValue)
+            favoriteTableView.topAnchor.constraint(equalTo: view.topAnchor),
+            favoriteTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            favoriteTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            favoriteTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }

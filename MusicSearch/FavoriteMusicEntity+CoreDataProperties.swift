@@ -37,6 +37,6 @@ extension FavoriteMusicEntity {
     }
 }
 
-extension FavoriteMusicEntity : Identifiable {
+extension FavoriteMusicEntity: Identifiable {
 
 }
