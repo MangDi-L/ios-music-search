@@ -76,19 +76,13 @@ final class FavoriteTableViewCell: UITableViewCell {
     }
     
     func setupCellData(data: FavoriteMusic) {
-//        guard let imageUrl = data.imageUrl else { return }
-//        setupMusicImageView(urlString: imageUrl)
-//        musicTitleLabel.text = data.trackName
-//        musicArtistNameLabel.text = data.artistName
-//        musicAlbumNameLabel.text = data.collectionName
-//        musicReleaseDateLabel.text = data.releaseDateToString
+        guard let imageUrl = data.imageUrl else { return }
+        musicImageView.setupMusicImageView(url: imageUrl)
+        musicTitleLabel.text = data.trackName
+        musicArtistNameLabel.text = data.artistName
+        musicAlbumNameLabel.text = data.collectionName
+        musicReleaseDateLabel.text = data.releaseDateToString
     }
-    
-//    private func setupMusicImageView(urlString: String) {
-//        musicImageView.setupMusicImageView(urlString: urlString) {
-//            
-//        }
-//    }
     
     private func setupAutoLayout() {
         [musicImageView, labelStackView].forEach { self.addSubview($0) }
