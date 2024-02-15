@@ -71,4 +71,12 @@ final class CoreDataManager {
         favoriteMusicEntity.trackName = favoriteMusic.trackName
         appDelegate?.saveContext()
     }
+    
+    func deleteFavoriteMusic(favoriteMusic: FavoriteMusic) {
+        guard let context else { return }
+        let favoriteMusicEntities = fetchFavoriteMusicEntities()
+        guard let favoriteMusicEntity = favoriteMusicEntities.first(where: { $0.id == favoriteMusic.id }) else { return }
+        context.delete(favoriteMusicEntity)
+        appDelegate?.saveContext()
+    }
 }
