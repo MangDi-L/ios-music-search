@@ -90,4 +90,10 @@ extension FavoriteViewController: UITableViewDelegate {
             return
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let favoriteDetailVC = FavoriteDetailViewController()
+        favoriteDetailVC.favoriteMusicData = favoriteMusicData[indexPath.row]
+        navigationController?.pushViewController(favoriteDetailVC, animated: true)
+    }
 }
