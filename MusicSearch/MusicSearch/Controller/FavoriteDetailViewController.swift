@@ -72,6 +72,16 @@ final class FavoriteDetailViewController: UIViewController {
         return label
     }()
     
+    private lazy var moreSingersMusicButotn: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.systemGray, for: .normal)
+        button.layer.cornerRadius = UIConstants.moreSingerButtonConerRadius
+        button.backgroundColor = UIColor(hex: UIColorExtension.moreSingerButtonHex, alpha: UIColorExtension.moreSingerButtonAlpha)
+        button.addTarget(self, action: #selector(touchupMoreSingersMusicButotn), for: .touchUpInside)
+        return button
+    }()
+    
     var favoriteMusicData: FavoriteMusic? {
         didSet {
             setupFavoriteDetailUI()
@@ -82,6 +92,20 @@ final class FavoriteDetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .tertiarySystemGroupedBackground
         setupAutoLayout()
+        setupMoreSingersMusicButotn()
+    }
+    
+    private func setupMoreSingersMusicButotn() {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.preferredFont(forTextStyle: .body)
+        ]
+        if let artistName = musicArtistNameLabel.text {
+            moreSingersMusicButotn.setAttributedTitle(NSAttributedString(string: "\(artistName) \(MusicInformation.moreSinger)", attributes: attributes), for: .normal)
+            if artistName == MusicInformation.noExist {
+                moreSingersMusicButotn.isEnabled = false
+                moreSingersMusicButotn.backgroundColor = .systemGray5
+            }
+        }
     }
     
     private func setupFavoriteDetailUI() {
@@ -116,7 +140,8 @@ final class FavoriteDetailViewController: UIViewController {
          musicPlayTime,
          titleLabel,
          artistNameLabel,
-         albumNameLabel].forEach { view.addSubview($0) }
+         albumNameLabel,
+         moreSingersMusicButotn].forEach { view.addSubview($0) }
         
         let musicImageViewHeightEqualWidthConstraint = musicImageView.heightAnchor.constraint(equalTo: musicImageView.widthAnchor, multiplier: UIConstants.defalutMultiplier)
         let musicImageViewHeightLessThanOrEqualToSafeAreaHeight = musicImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: UIConstants.imageViewHeightMultiplier)
@@ -164,7 +189,30 @@ final class FavoriteDetailViewController: UIViewController {
             
             musicReleaseDateLabel.topAnchor.constraint(equalTo: musicAlbumNameLabel.bottomAnchor, constant: UIConstants.highValue),
             musicReleaseDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
-            musicReleaseDateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.defaultValue)
+            musicReleaseDateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.defaultValue),
+            
+            moreSingersMusicButotn.topAnchor.constraint(equalTo: musicReleaseDateLabel.bottomAnchor, constant: UIConstants.highValue),
+            moreSingersMusicButotn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
+            moreSingersMusicButotn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.defaultValue),
+            moreSingersMusicButotn.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: UIConstants.buttonHeightMultiplier)
         ])
+    }
+    
+    @objc private func touchupMoreSingersMusicButotn() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tabBarController?.selectedIndex = .zero
+            guard let navigationController = self?.tabBarController?.selectedViewController as? UINavigationController,
+                  let mainVC = navigationController.viewControllers[.zero] as? MainViewController else { return }
+            
+            mainVC.navigationItem.searchController?.searchBar.text = ""
+            mainVC.musicData = []
+            mainVC.mainTableView.reloadData()
+            mainVC.setupMusicData(search: self?.musicArtistNameLabel.text ?? "")
+            mainVC.mainSearchController.searchBar.placeholder = self?.musicArtistNameLabel.text ?? ""
+            UIView.animate(withDuration: AnimationTimeConstants.basic) {
+                mainVC.mainTableView.setContentOffset(.zero, animated: true)
+            }
+            navigationController.popToRootViewController(animated: true)
+        }
     }
 }
