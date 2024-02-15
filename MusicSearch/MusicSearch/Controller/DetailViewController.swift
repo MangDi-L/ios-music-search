@@ -146,6 +146,30 @@ final class DetailViewController: UIViewController {
         musicPlayTime.text = playTime.calculateMusicPlayTime()
     }
     
+    private func showToastMessage(message: String) {
+        let toastLabel = UILabel(frame: CGRect(
+            x: view.frame.size.width / ToastMessageConstants.xDivisionValue - ToastMessageConstants.xMinusValue,
+            y: view.frame.size.height - ToastMessageConstants.yMinusValue,
+            width: ToastMessageConstants.width,
+            height: ToastMessageConstants.height))
+        toastLabel.backgroundColor = .secondarySystemGroupedBackground
+        toastLabel.font = UIFont.preferredFont(forTextStyle: .callout)
+        toastLabel.textAlignment = .center
+        toastLabel.text = message
+        toastLabel.alpha = ToastMessageConstants.alpha
+        toastLabel.layer.cornerRadius = ToastMessageConstants.cornerRadius
+        toastLabel.clipsToBounds = true
+        view.addSubview(toastLabel)
+        
+        UIView.animate(withDuration: ToastMessageConstants.animateDuration,
+                       delay: ToastMessageConstants.animateDelay,
+                       options: .curveEaseOut) {
+            toastLabel.alpha = .zero
+        } completion: { _ in
+            toastLabel.removeFromSuperview()
+        }
+    }
+    
     private func setupAutoLayout() {
         [musicImageView,
          musicTitleLabel,
@@ -246,5 +270,6 @@ final class DetailViewController: UIViewController {
                                           playTime: musicData.playTime,
                                           releaseDate: musicData.releaseDate)
         CoreDataManager.shared.insertFavoriteMusic(favoriteMusic: favoriteMusic)
+        showToastMessage(message: "Favorite에 추가되었습니다.")
     }
 }

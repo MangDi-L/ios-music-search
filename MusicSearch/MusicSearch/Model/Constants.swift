@@ -90,3 +90,15 @@ enum TabbarItemTitle {
     static let first = "Music Search"
     static let second = "Favorite"
 }
+
+enum ToastMessageConstants {
+    static let xDivisionValue: CGFloat = 2
+    static let xMinusValue: CGFloat = 100
+    static let yMinusValue: CGFloat = 150
+    static let width: CGFloat = 200
+    static let height: CGFloat = 35
+    static let alpha: CGFloat = 1
+    static let cornerRadius: CGFloat = 15
+    static let animateDuration: CGFloat = 3.5
+    static let animateDelay: CGFloat = 1
+}
