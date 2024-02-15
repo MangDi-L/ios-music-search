@@ -75,7 +75,7 @@ final class DetailViewController: UIViewController {
     private lazy var moreSingersMusicButotn: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(.systemGray, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         button.layer.cornerRadius = UIConstants.moreSingerButtonConerRadius
         button.backgroundColor = UIColor(hex: UIColorExtension.moreSingerButtonHex, alpha: UIColorExtension.moreSingerButtonAlpha)
         button.addTarget(self, action: #selector(touchupMoreSingersMusicButotn), for: .touchUpInside)
@@ -91,8 +91,8 @@ final class DetailViewController: UIViewController {
         button.layer.borderColor = UIColor(hex: UIColorExtension.moreSingerButtonHex, alpha: UIColorExtension.moreSingerButtonAlpha).cgColor
         button.setImage(UIImage(systemName: SystemImage.heart), for: .normal)
         button.semanticContentAttribute = .forceLeftToRight
-        button.setTitleColor(.systemGray, for: .normal)
-        button.setTitle(MusicInformation.plusFavoirte, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitle(MusicInformation.plusFavorite, for: .normal)
         button.addTarget(self, action: #selector(touchupFavoritePlusButton), for: .touchUpInside)
         return button
     }()

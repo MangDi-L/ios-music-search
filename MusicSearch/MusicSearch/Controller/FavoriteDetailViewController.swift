@@ -75,10 +75,23 @@ final class FavoriteDetailViewController: UIViewController {
     private lazy var moreSingersMusicButotn: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(.systemGray, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         button.layer.cornerRadius = UIConstants.moreSingerButtonConerRadius
         button.backgroundColor = UIColor(hex: UIColorExtension.moreSingerButtonHex, alpha: UIColorExtension.moreSingerButtonAlpha)
         button.addTarget(self, action: #selector(touchupMoreSingersMusicButotn), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var favoriteDeleteButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .clear
+        button.layer.cornerRadius = UIConstants.moreSingerButtonConerRadius
+        button.layer.borderWidth = UIConstants.buttonBorderWidth
+        button.layer.borderColor = UIColor(hex: UIColorExtension.favoriteDeleteButtonHex, alpha: UIColorExtension.favoriteDeleteButtonAlpha).cgColor
+        button.setTitleColor(.systemRed, for: .normal)
+        button.setTitle(MusicInformation.deleteFavorite, for: .normal)
+//        button.addTarget(self, action: #selector(touchupFavoritedDeleteButton), for: .touchUpInside)
         return button
     }()
     
@@ -141,7 +154,8 @@ final class FavoriteDetailViewController: UIViewController {
          titleLabel,
          artistNameLabel,
          albumNameLabel,
-         moreSingersMusicButotn].forEach { view.addSubview($0) }
+         moreSingersMusicButotn,
+         favoriteDeleteButton].forEach { view.addSubview($0) }
         
         let musicImageViewHeightEqualWidthConstraint = musicImageView.heightAnchor.constraint(equalTo: musicImageView.widthAnchor, multiplier: UIConstants.defalutMultiplier)
         let musicImageViewHeightLessThanOrEqualToSafeAreaHeight = musicImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: UIConstants.imageViewHeightMultiplier)
@@ -194,7 +208,12 @@ final class FavoriteDetailViewController: UIViewController {
             moreSingersMusicButotn.topAnchor.constraint(equalTo: musicReleaseDateLabel.bottomAnchor, constant: UIConstants.highValue),
             moreSingersMusicButotn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
             moreSingersMusicButotn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.defaultValue),
-            moreSingersMusicButotn.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: UIConstants.buttonHeightMultiplier)
+            moreSingersMusicButotn.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: UIConstants.buttonHeightMultiplier),
+            
+            favoriteDeleteButton.topAnchor.constraint(equalTo: moreSingersMusicButotn.bottomAnchor, constant: UIConstants.defaultValue),
+            favoriteDeleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: UIConstants.defaultValue),
+            favoriteDeleteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.defaultValue),
+            favoriteDeleteButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: UIConstants.buttonHeightMultiplier)
         ])
     }
     

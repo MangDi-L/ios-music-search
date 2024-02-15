@@ -50,7 +50,8 @@ enum MusicInformation {
     static let album = "Album"
     static let noExist = "-"
     static let moreSinger = "의 노래더보기"
-    static let plusFavoirte = "Favorite 추가"
+    static let plusFavorite = "Favorite 추가"
+    static let deleteFavorite = "Favorite 삭제"
 }
 
 enum TimeConstants {
@@ -77,6 +78,8 @@ enum SystemImage {
 enum UIColorExtension {
     static let moreSingerButtonHex = "#34ebde"
     static let moreSingerButtonAlpha = 0.5
+    static let favoriteDeleteButtonHex = "#fc0303"
+    static let favoriteDeleteButtonAlpha = 0.5
 }
 
 enum AnimationTimeConstants {
