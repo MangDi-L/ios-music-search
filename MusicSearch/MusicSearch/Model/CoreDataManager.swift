@@ -12,8 +12,8 @@ final class CoreDataManager {
     static let shared = CoreDataManager()
     private init() { }
     
-    let appDelegate = UIApplication.shared.delegate as? AppDelegate
-    lazy var context = appDelegate?.persistentContainer.viewContext
+    private let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    private lazy var context = appDelegate?.persistentContainer.viewContext
     
     // MARK: - [Read] 코어데이터에 저장된 데이터 모두 읽어오기
     private func fetchFavoriteMusicEntities2() -> [FavoriteMusicEntity] {

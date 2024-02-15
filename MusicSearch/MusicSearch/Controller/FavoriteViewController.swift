@@ -22,6 +22,10 @@ final class FavoriteViewController: UIViewController {
         setupNavigationBar()
         setupAutoLayout()
         setupFavoriteTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupFavoriteMusicData()
     }
     
@@ -78,7 +82,8 @@ extension FavoriteViewController: UITableViewDelegate {
         case .none:
             return
         case .delete:
-            return
+            CoreDataManager.shared.deleteFavoriteMusic(favoriteMusic: favoriteMusicData[indexPath.row])
+            setupFavoriteMusicData()
         case .insert:
             return
         @unknown default:
