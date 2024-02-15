@@ -26,6 +26,7 @@
 		1BF360432B7CCCCE00F60EBF /* FavoriteMusicEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF360412B7CCCCE00F60EBF /* FavoriteMusicEntity+CoreDataProperties.swift */; };
 		1BF360452B7DEFD900F60EBF /* FavoriteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF360442B7DEFD900F60EBF /* FavoriteDetailViewController.swift */; };
 		1BF360472B7DF37B00F60EBF /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF360462B7DF37B00F60EBF /* Double+Extension.swift */; };
+		1BF360492B7E729100F60EBF /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF360482B7E729100F60EBF /* String+Extension.swift */; };
 		1BF471112B707A2300A54012 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF471102B707A2300A54012 /* MainTableViewCell.swift */; };
 		1BF471132B708BD200A54012 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF471122B708BD200A54012 /* Constants.swift */; };
 		1BF471152B708DC200A54012 /* MusicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF471142B708DC200A54012 /* MusicModel.swift */; };
@@ -59,6 +60,7 @@
 		1BF360412B7CCCCE00F60EBF /* FavoriteMusicEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteMusicEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		1BF360442B7DEFD900F60EBF /* FavoriteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDetailViewController.swift; sourceTree = "<group>"; };
 		1BF360462B7DF37B00F60EBF /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		1BF360482B7E729100F60EBF /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		1BF471102B707A2300A54012 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		1BF471122B708BD200A54012 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1BF471142B708DC200A54012 /* MusicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicModel.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				1BC195D02B7484E6002EE44B /* UIColor+Extension.swift */,
 				1BC557082B7A3B2A00C0D039 /* UIImageView+Extension.swift */,
 				1BF360462B7DF37B00F60EBF /* Double+Extension.swift */,
+				1BF360482B7E729100F60EBF /* String+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				1BF471132B708BD200A54012 /* Constants.swift in Sources */,
 				1BF4711D2B70A57200A54012 /* SearchResultCollectionViewCell.swift in Sources */,
 				1BF360472B7DF37B00F60EBF /* Double+Extension.swift in Sources */,
+				1BF360492B7E729100F60EBF /* String+Extension.swift in Sources */,
 				1BF471172B70922B00A54012 /* NetworkManager.swift in Sources */,
 				1BF471112B707A2300A54012 /* MainTableViewCell.swift in Sources */,
 				1BF360432B7CCCCE00F60EBF /* FavoriteMusicEntity+CoreDataProperties.swift in Sources */,
