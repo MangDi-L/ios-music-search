@@ -205,8 +205,6 @@ final class FavoriteDetailViewController: UIViewController {
                   let mainVC = navigationController.viewControllers[.zero] as? MainViewController else { return }
             
             mainVC.navigationItem.searchController?.searchBar.text = ""
-            mainVC.musicData = []
-            mainVC.mainTableView.reloadData()
             mainVC.setupMusicData(search: self?.musicArtistNameLabel.text ?? "")
             mainVC.mainSearchController.searchBar.placeholder = self?.musicArtistNameLabel.text ?? ""
             UIView.animate(withDuration: AnimationTimeConstants.basic) {
