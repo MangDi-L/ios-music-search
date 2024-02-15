@@ -131,7 +131,7 @@ final class FavoriteDetailViewController: UIViewController {
         musicTitleLabel.text = title
         musicArtistNameLabel.text = name
         musicAlbumNameLabel.text = favoriteMusicData.collectionName
-        musicReleaseDateLabel.text = favoriteMusicData.releaseDateToString
+        musicReleaseDateLabel.text = favoriteMusicData.releaseDate?.releaseDateToString
         
         guard var playTime = favoriteMusicData.playTime,
               favoriteMusicData.releaseDate != nil,

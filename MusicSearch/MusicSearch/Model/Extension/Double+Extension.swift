@@ -8,7 +8,7 @@
 import Foundation
 
 extension Double {
-    mutating func calculateMusicPlayTime() -> String {
+    func calculateMusicPlayTime() -> String {
         var seconds = roundl(self / TimeConstants.thousand)
         let minutes = seconds / TimeConstants.sixty
         seconds = Double(Int(seconds) % Int(TimeConstants.sixty))

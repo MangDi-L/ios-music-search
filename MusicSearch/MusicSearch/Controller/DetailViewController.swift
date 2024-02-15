@@ -133,7 +133,7 @@ final class DetailViewController: UIViewController {
         musicTitleLabel.text = title
         musicArtistNameLabel.text = name
         musicAlbumNameLabel.text = musicData.collectionName
-        musicReleaseDateLabel.text = musicData.releaseDateToString
+        musicReleaseDateLabel.text = musicData.releaseDate?.releaseDateToString
         
         guard var playTime = musicData.playTime,
               musicData.releaseDate != nil,

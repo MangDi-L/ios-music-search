@@ -82,7 +82,7 @@ final class FavoriteTableViewCell: UITableViewCell {
         musicTitleLabel.text = data.trackName
         musicArtistNameLabel.text = data.artistName
         musicAlbumNameLabel.text = data.collectionName
-        musicReleaseDateLabel.text = data.releaseDateToString
+        musicReleaseDateLabel.text = data.releaseDate?.releaseDateToString
     }
     
     private func setupAutoLayout() {

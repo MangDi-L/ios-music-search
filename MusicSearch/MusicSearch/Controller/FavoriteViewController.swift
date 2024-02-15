@@ -38,7 +38,6 @@ final class FavoriteViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         title = NavigationBarText.secondTitle
         navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
     private func setupFavoriteTableView() {

@@ -16,18 +16,6 @@ struct FavoriteMusic: Identifiable {
     let playTime: Double?
     let releaseDate: String?
     
-    var releaseDateToString: String {
-        guard let releaseDate,
-              let isoDate = ISO8601DateFormatter().date(from: releaseDate) else {
-            return ""
-        }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let date = dateFormatter.string(from: isoDate)
-        return date
-    }
-    
     init(id: UUID? = UUID(),
          artistName: String?,
          collectionName: String?,
