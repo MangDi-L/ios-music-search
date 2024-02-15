@@ -16,7 +16,7 @@ final class CoreDataManager {
     lazy var context = appDelegate?.persistentContainer.viewContext
     
     // MARK: - [Read] 코어데이터에 저장된 데이터 모두 읽어오기
-    private func fetchFavoriteMusicEntities() -> [FavoriteMusicEntity] {
+    private func fetchFavoriteMusicEntities2() -> [FavoriteMusicEntity] {
         var favoriteMusicEntities: [FavoriteMusicEntity] = []
         if let context = context {
             let request = NSFetchRequest<NSManagedObject>(entityName: "FavoriteMusicEntity")
@@ -34,7 +34,7 @@ final class CoreDataManager {
         return favoriteMusicEntities
     }
     
-    private func fetchFavoriteMusicEntities2() -> [FavoriteMusicEntity] {
+    private func fetchFavoriteMusicEntities() -> [FavoriteMusicEntity] {
         do {
             let request = FavoriteMusicEntity.fetchRequest()
             guard let context else { return [] }
@@ -46,16 +46,29 @@ final class CoreDataManager {
     }
     
     func fetchFavoriteMusics() -> [FavoriteMusic] {
-        let favoriteMusicEntities = fetchFavoriteMusicEntities2()
+        let favoriteMusicEntities = fetchFavoriteMusicEntities()
         let favoriteMusics = favoriteMusicEntities.map {
             FavoriteMusic(id: $0.id,
                           artistName: $0.artistName,
                           collectionName: $0.collectionName,
                           trackName: $0.trackName,
-                          imageUrl: $0.imageUrl,
+                          imageData: $0.imageData,
                           playTime: $0.playTime,
                           releaseDate: $0.releaseDate)
         }
         return favoriteMusics
+    }
+    
+    func insertFavoriteMusic(favoriteMusic: FavoriteMusic) {
+        guard let context else { return }
+        let favoriteMusicEntity = FavoriteMusicEntity(context: context)
+        favoriteMusicEntity.id = favoriteMusic.id
+        favoriteMusicEntity.artistName = favoriteMusic.artistName
+        favoriteMusicEntity.collectionName = favoriteMusic.collectionName
+        favoriteMusicEntity.imageData = favoriteMusic.imageData
+        favoriteMusicEntity.playTime = favoriteMusic.playTime ?? .zero
+        favoriteMusicEntity.releaseDate = favoriteMusic.releaseDate
+        favoriteMusicEntity.trackName = favoriteMusic.trackName
+        appDelegate?.saveContext()
     }
 }

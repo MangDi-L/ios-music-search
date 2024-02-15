@@ -12,7 +12,7 @@ struct FavoriteMusic: Identifiable {
     let artistName: String?
     let collectionName: String?
     let trackName: String?
-    let imageUrl: URL?
+    let imageData: Data?
     let playTime: Double?
     let releaseDate: String?
     
@@ -26,5 +26,21 @@ struct FavoriteMusic: Identifiable {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let date = dateFormatter.string(from: isoDate)
         return date
+    }
+    
+    init(id: UUID? = UUID(),
+         artistName: String?,
+         collectionName: String?,
+         trackName: String?,
+         imageData: Data?,
+         playTime: Double?,
+         releaseDate: String?) {
+        self.id = id
+        self.artistName = artistName
+        self.collectionName = collectionName
+        self.trackName = trackName
+        self.imageData = imageData
+        self.playTime = playTime
+        self.releaseDate = releaseDate
     }
 }

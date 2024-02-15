@@ -76,8 +76,9 @@ final class FavoriteTableViewCell: UITableViewCell {
     }
     
     func setupCellData(data: FavoriteMusic) {
-        guard let imageUrl = data.imageUrl else { return }
-        musicImageView.setupMusicImageView(url: imageUrl)
+        guard let imageData = data.imageData,
+              let image = UIImage(data: imageData) else { return }
+        musicImageView.image = image
         musicTitleLabel.text = data.trackName
         musicArtistNameLabel.text = data.artistName
         musicAlbumNameLabel.text = data.collectionName

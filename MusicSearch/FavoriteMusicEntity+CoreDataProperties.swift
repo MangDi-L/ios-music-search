@@ -2,7 +2,7 @@
 //  FavoriteMusicEntity+CoreDataProperties.swift
 //  MusicSearch
 //
-//  Created by mangdi on 2/13/24.
+//  Created by mangdi on 2/14/24.
 //
 //
 
@@ -19,10 +19,10 @@ extension FavoriteMusicEntity {
     @NSManaged public var id: UUID?
     @NSManaged public var artistName: String?
     @NSManaged public var collectionName: String?
-    @NSManaged public var trackName: String?
-    @NSManaged public var imageUrl: URL?
+    @NSManaged public var imageData: Data?
     @NSManaged public var playTime: Double
     @NSManaged public var releaseDate: String?
+    @NSManaged public var trackName: String?
 }
 
 extension FavoriteMusicEntity: Identifiable {

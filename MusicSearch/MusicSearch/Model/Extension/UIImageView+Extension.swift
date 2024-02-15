@@ -48,11 +48,4 @@ extension UIImageView {
             }
         }
     }
-    
-    func setupMusicImageView(url: URL) {
-        if let loadedImageData = try? Data(contentsOf: url),
-           let image = UIImage(data: loadedImageData) {
-            self.image = image
-        }
-    }
 }

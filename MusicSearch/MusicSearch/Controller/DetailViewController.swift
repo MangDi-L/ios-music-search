@@ -93,7 +93,7 @@ final class DetailViewController: UIViewController {
         button.semanticContentAttribute = .forceLeftToRight
         button.setTitleColor(.systemGray, for: .normal)
         button.setTitle(MusicInformation.plusFavoirte, for: .normal)
-//        button.addTarget(self, action: #selector(), for: .touchUpInside)
+        button.addTarget(self, action: #selector(touchupFavoritePlusButton), for: .touchUpInside)
         return button
     }()
     
@@ -262,5 +262,19 @@ final class DetailViewController: UIViewController {
             }
         }
         navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @objc private func touchupFavoritePlusButton() {
+        guard let musicData,
+              let image = musicImageView.image,
+              let imageData = image.pngData() else { return }
+        
+        let favoriteMusic = FavoriteMusic(artistName: musicData.artistName,
+                                          collectionName: musicData.collectionName,
+                                          trackName: musicData.trackName,
+                                          imageData: imageData,
+                                          playTime: musicData.playTime,
+                                          releaseDate: musicData.releaseDate)
+        CoreDataManager.shared.insertFavoriteMusic(favoriteMusic: favoriteMusic)
     }
 }
