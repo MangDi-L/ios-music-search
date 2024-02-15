@@ -135,7 +135,7 @@ final class DetailViewController: UIViewController {
         musicAlbumNameLabel.text = musicData.collectionName
         musicReleaseDateLabel.text = musicData.releaseDateToString
         
-        guard let playTime = musicData.playTime,
+        guard var playTime = musicData.playTime,
               musicData.releaseDate != nil,
               musicData.collectionName != nil else {
             musicPlayTime.text = MusicInformation.noExist
@@ -143,18 +143,7 @@ final class DetailViewController: UIViewController {
             musicReleaseDateLabel.text = MusicInformation.noExist
             return
         }
-        musicPlayTime.text = calculateMusicPlayTime(time: playTime)
-    }
-    
-    private func calculateMusicPlayTime(time: Double) -> String {
-        var seconds = round(time / TimeConstants.thousand)
-        let minutes = seconds / TimeConstants.sixty
-        seconds = Double(Int(seconds) % Int(TimeConstants.sixty))
-        if Int(seconds) < Number.ten {
-            return "\(Int(minutes)):0\(String(Int(seconds)))"
-        } else {
-            return "\(Int(minutes)):\(Int(seconds))"
-        }
+        musicPlayTime.text = playTime.calculateMusicPlayTime()
     }
     
     private func setupAutoLayout() {

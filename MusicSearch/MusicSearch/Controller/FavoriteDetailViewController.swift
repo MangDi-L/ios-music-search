@@ -96,7 +96,7 @@ final class FavoriteDetailViewController: UIViewController {
         musicAlbumNameLabel.text = favoriteMusicData.collectionName
         musicReleaseDateLabel.text = favoriteMusicData.releaseDateToString
         
-        guard let playTime = favoriteMusicData.playTime,
+        guard var playTime = favoriteMusicData.playTime,
               favoriteMusicData.releaseDate != nil,
               favoriteMusicData.collectionName != nil else {
             musicPlayTime.text = MusicInformation.noExist
@@ -104,20 +104,8 @@ final class FavoriteDetailViewController: UIViewController {
             musicReleaseDateLabel.text = MusicInformation.noExist
             return
         }
-        musicPlayTime.text = calculateMusicPlayTime(time: playTime)
+        musicPlayTime.text = playTime.calculateMusicPlayTime()
     }
-    
-    private func calculateMusicPlayTime(time: Double) -> String {
-        var seconds = round(time / TimeConstants.thousand)
-        let minutes = seconds / TimeConstants.sixty
-        seconds = Double(Int(seconds) % Int(TimeConstants.sixty))
-        if Int(seconds) < Number.ten {
-            return "\(Int(minutes)):0\(String(Int(seconds)))"
-        } else {
-            return "\(Int(minutes)):\(Int(seconds))"
-        }
-    }
-    // 디테일뷰 이미지뷰비동기처리하는코드 리팩토링하기
     
     private func setupAutoLayout() {
         [musicImageView,
