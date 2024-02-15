@@ -76,7 +76,7 @@ enum SystemImage {
 }
 
 enum UIColorExtension {
-    static let moreSingerButtonHex = "#34ebde"
+    static let moreSingerButtonHex = "#fa6634"
     static let moreSingerButtonAlpha = 0.5
     static let favoriteDeleteButtonHex = "#fc0303"
     static let favoriteDeleteButtonAlpha = 0.5
