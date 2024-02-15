@@ -91,7 +91,7 @@ final class FavoriteDetailViewController: UIViewController {
         button.layer.borderColor = UIColor(hex: UIColorExtension.favoriteDeleteButtonHex, alpha: UIColorExtension.favoriteDeleteButtonAlpha).cgColor
         button.setTitleColor(.systemRed, for: .normal)
         button.setTitle(MusicInformation.deleteFavorite, for: .normal)
-//        button.addTarget(self, action: #selector(touchupFavoritedDeleteButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(touchupFavoritedDeleteButton), for: .touchUpInside)
         return button
     }()
     
@@ -231,5 +231,11 @@ final class FavoriteDetailViewController: UIViewController {
             }
             navigationController.popToRootViewController(animated: true)
         }
+    }
+    
+    @objc private func touchupFavoritedDeleteButton() {
+        guard let favoriteMusicData else { return }
+        CoreDataManager.shared.deleteFavoriteMusic(favoriteMusic: favoriteMusicData)
+        navigationController?.popViewController(animated: true)
     }
 }
